@@ -1,9 +1,7 @@
-import {format} from 'date-fns';
-import {parse} from 'querystring';
 import React, {memo} from 'react';
 import {numberParser, QueryParsers, stringParser, useQuery} from '../../../../common/hooks/useQuery';
-import {QueryResponse, QueryResponseError} from '../../types';
 
+// eslint-disable-next-line
 const enum PersonType {
     One = 'one',
     Two = 'two'
@@ -24,7 +22,7 @@ const parsers: QueryParsers<Person> = {
 const AuthResponsePage: React.FC = () => {
     const query = useQuery(parsers);
     return (
-        <div>Auth Page</div>
+        <div>Auth Page {query.name}</div>
     );
 };
 
