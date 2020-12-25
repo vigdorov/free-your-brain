@@ -15,6 +15,8 @@ type Person = {
     type: PersonType;
 };
 
+console.log('test');
+
 const parsers: QueryParsers<Person> = {
     name: stringParser(''),
     age: numberParser(),
