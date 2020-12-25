@@ -29,4 +29,5 @@ jobs:
       - name: Eslint check
         uses: Krizzu/eslint-check-action@v1.1.0
         with:
+          ghToken: ${{ secrets.d97121e57aee247d9f109a186adb45aaaa0c91ec }}
           eslintConfig: ".eslintrc.json"
