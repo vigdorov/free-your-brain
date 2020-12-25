@@ -3,7 +3,7 @@ import {Stream, Sink} from '@most/types';
 import {newDefaultScheduler} from '@most/scheduler';
 import {pending, RemoteData} from '@devexperts/remote-data-ts';
 
-// eslint-disable-next-line no-empty-function
+// eslint-disable-next-line
 const emptyFunc = () => {};
 
 export const useStream = <T>(stream$: Stream<T>, defaultValue: T): T => {
@@ -22,7 +22,7 @@ export const useStream = <T>(stream$: Stream<T>, defaultValue: T): T => {
         return () => {
             effect$.dispose();
         };
-    }, []);
+    }, [stream$]);
 
     return state;
 };
