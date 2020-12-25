@@ -1,16 +1,24 @@
+import {format} from 'date-fns';
 import {parse} from 'querystring';
 import React, {memo} from 'react';
-import {QueryParsers, useQuery} from '../../../../common/hooks/useQuery';
+import {numberParser, QueryParsers, stringParser, useQuery} from '../../../../common/hooks/useQuery';
 import {QueryResponse, QueryResponseError} from '../../types';
+
+const enum PersonType {
+    One = 'one',
+    Two = 'two'
+}
 
 type Person = {
     name: string;
-    age: number;
+    age?: number;
+    type: PersonType;
 };
 
 const parsers: QueryParsers<Person> = {
-    name: name => name ? name.toString() : '',
-    age: age => age ? Number(age) : undefined,
+    name: stringParser(''),
+    age: numberParser(),
+    type: stringParser(PersonType.One),
 };
 
 const AuthResponsePage: React.FC = () => {
