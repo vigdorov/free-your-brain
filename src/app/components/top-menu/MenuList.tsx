@@ -1,10 +1,8 @@
 import {List, ListItem as MaterialListItem, ListItemIcon, ListItemText} from '@material-ui/core';
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
-
 import InboxIcon from '@material-ui/icons/MoveToInbox';
-
-import {ListItem} from '../../../common/types';
+import {ListItem} from '_types/common';
 
 type Props = {
     list: ListItem[];

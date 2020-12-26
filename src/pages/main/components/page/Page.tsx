@@ -1,8 +1,8 @@
 import React, {memo} from 'react';
-import {AuthService} from '../../../../services/AuthService';
-import {useStream} from '../../../../utils/useStream';
+import {AuthService} from '_services/AuthService';
+import {useStream} from '_utils/useStream';
+import {createService} from '_utils/createService';
 import ComponentStream from '../component-stream/ComponentStream';
-import {createService} from '../../../../utils/createService';
 
 const service = createService(1, {
     changeWithStr: (state: number, val: string) => {

@@ -68,7 +68,6 @@
             }
         ],
         "no-trailing-spaces": "warn",
-        "no-unused-vars": "warn",
         "default-case": "warn",
         "default-param-last": "warn",
         "no-alert": "warn",
@@ -89,6 +88,7 @@
         "@typescript-eslint/no-use-before-define": "off",
         "@typescript-eslint/no-namespace": "off",
         "@typescript-eslint/explicit-module-boundary-types": "off",
+        "@typescript-eslint/no-unused-vars": ["error"],
         "array-bracket-spacing": ["warn", "never"],
         "block-spacing": ["warn", "never"],
         "brace-style": ["warn", "1tbs", {"allowSingleLine": true}],
@@ -127,11 +127,14 @@
         "object-property-newline": ["warn", {"allowAllPropertiesOnSameLine": true}],
         "key-spacing": ["warn", {"beforeColon": false, "afterColon": true}],
         "space-before-blocks": "warn",
-        "space-before-function-paren": ["warn", {
-            "anonymous": "always",
-            "named": "never",
-            "asyncArrow": "always"
-        }],
+        "space-before-function-paren": [
+            "warn",
+            {
+                "anonymous": "always",
+                "named": "never",
+                "asyncArrow": "always"
+            }
+        ],
         "space-in-parens": ["warn", "never"],
         "space-infix-ops": "warn",
         "arrow-parens": ["warn", "as-needed"],

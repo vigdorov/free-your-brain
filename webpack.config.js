@@ -1,13 +1,22 @@
 const path = require('path');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const webpack = require('webpack');
 
 module.exports = {
-    entry: './src/index.tsx',
+    entry: {
+        app: {
+            import: './src/app/index.tsx',
+            dependOn: [
+                'rct', 
+            ],
+        },
+        'rct': ['react', 'react-dom', 'react-router-dom'],
+    },
     output: {
         path: path.resolve(__dirname, 'build'),
-        filename: 'index.js',
+        filename: '[fullhash].[name].js',
     },
     devServer: {
         contentBase: './build',
@@ -15,6 +24,32 @@ module.exports = {
         compress: true,
         open: true,
         port: 3189,
+    },
+    resolve: {
+        extensions: ['.tsx', '.ts', '.js'],
+        alias: {
+            _types: path.resolve(__dirname, 'src/core/types/'),
+            _api: path.resolve(__dirname, 'src/core/api/'),
+            _blocks: path.resolve(__dirname, 'src/core/blocks/'),
+            _consts: path.resolve(__dirname, 'src/core/consts/'),
+            _hooks: path.resolve(__dirname, 'src/core/hooks/'),
+            _hoks: path.resolve(__dirname, 'src/core/hoks/'),
+            _services: path.resolve(__dirname, 'src/core/services/'),
+            _utils: path.resolve(__dirname, 'src/core/utils/'),
+            _enums: path.resolve(__dirname, 'src/core/enums/'),
+            _pages: path.resolve(__dirname, 'src/pages/'),
+        }
+    },
+    optimization: {
+        splitChunks: {
+            chunks: 'all',
+            cacheGroups: {
+                defaultVendors: {
+                    test: /[\\/]node_modules[\\/]/,
+                    enforce: true,
+                },
+            },
+        },
     },
     module: {
         rules: [
@@ -49,9 +84,6 @@ module.exports = {
             },
         ],
     },
-    resolve: {
-        extensions: ['.tsx', '.ts', '.js'],
-    },
     plugins: [
         new HtmlWebpackPlugin({
             template: './public/index.html',
@@ -59,7 +91,7 @@ module.exports = {
             favicon: './public/favicon.ico'
         }),
         new MiniCssExtractPlugin({
-            filename: '[name].css',
+            filename: '[fullhash].[name].css',
         }),
         new CleanWebpackPlugin(),
     ],
