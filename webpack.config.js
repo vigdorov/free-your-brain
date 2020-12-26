@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 
 module.exports = {
+    mode: 'development',
     entry: {
         app: {
             import: './src/app/index.tsx',
@@ -38,6 +39,7 @@ module.exports = {
             _utils: path.resolve(__dirname, 'src/core/utils/'),
             _enums: path.resolve(__dirname, 'src/core/enums/'),
             _pages: path.resolve(__dirname, 'src/pages/'),
+            _referers: path.resolve(__dirname, 'src/referers/'),
         }
     },
     optimization: {

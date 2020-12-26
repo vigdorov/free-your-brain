@@ -1,5 +1,5 @@
-import React, {memo} from 'react';
-import {HashRouter, Route, Switch} from 'react-router-dom';
+import React, {Fragment, memo} from 'react';
+import {Route, Switch} from 'react-router-dom';
 import mainPageRouter from '_pages/main/routing';
 import chaosBoxPageRouter from '_pages/chaos-box/routing';
 import calendarPageRouter from '_pages/calendar/routing';
@@ -8,28 +8,32 @@ import projectsPageRouter from '_pages/projects/routing';
 import settingsPageRouter from '_pages/settings/routing';
 import signInPageRouter from '_pages/sign-in/routing';
 import tagsPageRouter from '_pages/tags/routing';
-import NotFoundPage from '_pages/not-found/components/page/Page';
-import TopMenu from '../top-menu/TopMenu';
+import NotFoundPage from '_pages/not-found/components/page';
+import TopMenu from '../top-menu';
 import './Page.scss';
+import BothMenu from '../both-menu';
 
 const Page: React.FC = () => {
     return (
-        <HashRouter>
+        <Fragment>
             <TopMenu />
-            <Switch>
-                {mainPageRouter}
-                {chaosBoxPageRouter}
-                {calendarPageRouter}
-                {informationPageRouter}
-                {projectsPageRouter}
-                {settingsPageRouter}
-                {signInPageRouter}
-                {tagsPageRouter}
-                <Route>
-                    <NotFoundPage />
-                </Route>
-            </Switch>
-        </HashRouter>
+            <div>
+                <Switch>
+                    {mainPageRouter}
+                    {chaosBoxPageRouter}
+                    {calendarPageRouter}
+                    {informationPageRouter}
+                    {projectsPageRouter}
+                    {settingsPageRouter}
+                    {signInPageRouter}
+                    {tagsPageRouter}
+                    <Route>
+                        <NotFoundPage />
+                    </Route>
+                </Switch>
+            </div>
+            <BothMenu />
+        </Fragment>
     );
 };
 

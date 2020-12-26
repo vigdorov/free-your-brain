@@ -30,6 +30,7 @@
             "_utils/*": ["./src/core/utils/*"],
             "_enums/*": ["./src/core/enums/*"],
             "_pages/*": ["./src/pages/*"],
+            "_referers/*": ["./src/referers/*"],
         }
     },
     "include": [
