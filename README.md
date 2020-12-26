@@ -1,19 +1,26 @@
-Install App dependencies:
-```
-npm i
-```
----
-Start App and open page in your browser:
-```
+### Информация
+- [Сайт проекта](https://vigdorov.github.io/free-your-brain)
+- [Wiki](https://github.com/vigdorov/free-your-brain/wiki)
+
+
+### Скрипты
+
+```bash
+# Установка\Обновление зависимостей
+npm init
+
+# Запуск приложения с открытием страницы
 npm start
-```
----
-Start App without open:
-```
+
+# Запуск приложения без открытия страницы
 npm run dev
-```
----
-Build your App:
-```
+
+# Сборка приложения
 npm run build
+
+# Проверка кода линтером и проверка тайпингов
+npm run lint
+
+# Запуск тестов
+npm run test
 ```

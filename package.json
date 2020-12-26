@@ -25,12 +25,14 @@
     },
     "scripts": {
         "start": "webpack serve",
+        "init": "npm run clean && npm i",
         "dev": "webpack serve --open false",
         "build": "webpack --mode=production",
         "eslint": "eslint -c .eslintrc.json src --fix",
         "tsc": "tsc --p ./tsconfig.json",
         "lint": "npm run eslint && npm run tsc",
-        "test": "jest"
+        "test": "jest",
+        "clean": "rm -rf node_modules && rm -rf build"
     },
     "devDependencies": {
         "@babel/core": "^7.12.3",
