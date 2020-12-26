@@ -49,16 +49,14 @@ export function booleanParser(defaultValue?: boolean) {
 
 // Array parser (должен уметь с enum)
 
-export function useQuery(): ParsedUrlQuery;
-export function useQuery<T extends {[name: string]: unknown}>(queryParsers: QueryParsers<T>): Partial<T>;
 export function useQuery<T extends {[name: string]: unknown}>(
-    queryParsers?: QueryParsers<T>
+    queryParsers: QueryParsers<T>
 ): ParsedUrlQuery | Partial<T> {
     const {search} = useLocation();
 
     return useMemo(() => {
         const query = parse(search.slice(1));
-        return queryParsers ? Object.keys(query).reduce<Partial<T>>((memo, key) => {
+        return queryParsers ? Object.keys(queryParsers).reduce<T>((memo, key) => {
             if (key in queryParsers) {
                 const parser = queryParsers[key];
                 return {
@@ -67,6 +65,6 @@ export function useQuery<T extends {[name: string]: unknown}>(
                 };
             }
             return memo;
-        }, {}) : query;
+        }, {} as T) : query;
     }, [search, queryParsers]);
 }
