@@ -25,4 +25,4 @@ jobs:
 
       # eslint
       - name: lint check
-        run: npm i && npm run lint
+        run: npm i && npm run lint && npm run build
