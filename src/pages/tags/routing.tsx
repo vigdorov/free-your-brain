@@ -4,5 +4,5 @@ import {ROUTES} from '_consts/common';
 import Page from './components/page/Page';
 
 export default (
-    <Route component={Page} path={ROUTES.MAIN} exact />
+    <Route component={Page} path={ROUTES.TAGS} exact />
 );

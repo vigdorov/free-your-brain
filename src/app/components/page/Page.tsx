@@ -1,11 +1,14 @@
 import React, {memo} from 'react';
 import {HashRouter, Route, Switch} from 'react-router-dom';
-
-import mainPageRouter from '../../../pages/main/routing';
-import queuesPageRouter from '../../../pages/queues/routing';
-import tasksPageRouter from '../../../pages/tasks/routing';
-import authResponsePageRouter from '../../../pages/auth-response/routing';
-import NotFoundPage from '../../../pages/not-found/components/page/Page';
+import mainPageRouter from '_pages/main/routing';
+import chaosBoxPageRouter from '_pages/chaos-box/routing';
+import calendarPageRouter from '_pages/calendar/routing';
+import informationPageRouter from '_pages/information/routing';
+import projectsPageRouter from '_pages/projects/routing';
+import settingsPageRouter from '_pages/settings/routing';
+import signInPageRouter from '_pages/sign-in/routing';
+import tagsPageRouter from '_pages/tags/routing';
+import NotFoundPage from '_pages/not-found/components/page/Page';
 import TopMenu from '../top-menu/TopMenu';
 import './Page.scss';
 
@@ -15,9 +18,13 @@ const Page: React.FC = () => {
             <TopMenu />
             <Switch>
                 {mainPageRouter}
-                {queuesPageRouter}
-                {tasksPageRouter}
-                {authResponsePageRouter}
+                {chaosBoxPageRouter}
+                {calendarPageRouter}
+                {informationPageRouter}
+                {projectsPageRouter}
+                {settingsPageRouter}
+                {signInPageRouter}
+                {tagsPageRouter}
                 <Route>
                     <NotFoundPage />
                 </Route>

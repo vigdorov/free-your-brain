@@ -1,8 +1,8 @@
 import React, {FC, memo} from 'react';
 import {chain, fromPromise, map} from '@most/core';
 import {pipe} from 'fp-ts/lib/pipeable';
-import {useStream} from '../../../../utils/useStream';
-import {list$} from '../../../../services/service1';
+import {useStream} from '_utils/useStream';
+import {list$} from '_services/service1';
 
 const promise1: (id: number) => Promise<string> = (id: number) => new Promise(res => {
     setTimeout(() => res(`${id}  123123`), 6000);

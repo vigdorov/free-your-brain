@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "baseUrl": ".",
         "outDir": "./dist/",
         "target": "es5",
         "lib": ["dom", "dom.iterable", "esnext"],
@@ -17,7 +18,19 @@
         "resolveJsonModule": true,
         "isolatedModules": false,
         "noEmit": false,
-        "jsx": "react"
+        "jsx": "react",
+        "paths": {
+            "_api/*": ["./src/core/api/*"],
+            "_blocks/*": ["./src/core/blocks/*"],
+            "_consts/*": ["./src/core/consts/*"],
+            "_hooks/*": ["./src/core/hooks/*"],
+            "_hoks/*": ["./src/core/hoks/*"],
+            "_services/*": ["./src/core/services/*"],
+            "_types/*": ["./src/core/types/*"],
+            "_utils/*": ["./src/core/utils/*"],
+            "_enums/*": ["./src/core/enums/*"],
+            "_pages/*": ["./src/pages/*"],
+        }
     },
     "include": [
         "src/**/*.ts",
