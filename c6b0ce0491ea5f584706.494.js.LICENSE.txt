@@ -1,0 +1,13 @@
+/**
+ * A better abstraction over CSS.
+ *
+ * @copyright Oleg Isonen (Slobodskoi) / Isonen 2014-present
+ * @website https://github.com/cssinjs/jss
+ * @license MIT
+ */
+
+/** @license MIT License (c) copyright 2010 original author or authors */
+
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+
+/** @license MIT License (c) copyright 2010-2017 original author or authors */
