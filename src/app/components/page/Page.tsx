@@ -1,5 +1,5 @@
 import React, {memo} from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {HashRouter, Route, Switch} from 'react-router-dom';
 
 import mainPageRouter from '../../../pages/main/routing';
 import queuesPageRouter from '../../../pages/queues/routing';
@@ -11,7 +11,7 @@ import './Page.scss';
 
 const Page: React.FC = () => {
     return (
-        <BrowserRouter>
+        <HashRouter>
             <TopMenu />
             <Switch>
                 {mainPageRouter}
@@ -22,7 +22,7 @@ const Page: React.FC = () => {
                     <NotFoundPage />
                 </Route>
             </Switch>
-        </BrowserRouter>
+        </HashRouter>
     );
 };
 
