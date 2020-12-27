@@ -10,7 +10,8 @@ import SearchIcon from '@material-ui/icons/Search';
 import {Avatar} from '@material-ui/core';
 import {useParams} from '_hooks/useParams';
 import {PageType} from '_enums/common';
-import {PAGE_TITLE, ROUTES} from '_consts/common';
+import {PAGE_TITLE} from '_consts/common';
+import {buildPath} from '../../../core/utils/buildPath';
 
 const NO_NAME_AVATAR = 'https://d.newsweek.com/en/full/425257/02-10-putin-economy.jpg';
 
@@ -33,7 +34,7 @@ const TopMenu: React.FC = () => {
     const history = useHistory();
 
     const handleGoRoot = () => {
-        history.push(ROUTES.MAIN);
+        history.push(buildPath({pageType: PageType.Main}));
     };
 
     const title = PAGE_TITLE[pageType];
