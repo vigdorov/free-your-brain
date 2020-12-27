@@ -8,10 +8,10 @@ import IconButton from '@material-ui/core/IconButton';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import SearchIcon from '@material-ui/icons/Search';
 import {Avatar} from '@material-ui/core';
-import {useParams} from '_hooks/useParams';
 import {PageType} from '_enums/common';
 import {PAGE_TITLE} from '_consts/common';
-import {buildPath} from '../../../core/utils/buildPath';
+import {usePageType} from '_hooks/usePageType';
+import {buildPath} from '_utils/buildPath';
 
 const NO_NAME_AVATAR = 'https://d.newsweek.com/en/full/425257/02-10-putin-economy.jpg';
 
@@ -30,7 +30,7 @@ const useStyles = makeStyles(() =>
 
 const TopMenu: React.FC = () => {
     const classes = useStyles();
-    const {pageType} = useParams();
+    const pageType = usePageType();
     const history = useHistory();
 
     const handleGoRoot = () => {
