@@ -1,4 +1,4 @@
-import {numberToString} from '_utils/common';
+import {numberToString} from '../common';
 
 describe('test numberToString', () => {
     it('success convert', () => {
