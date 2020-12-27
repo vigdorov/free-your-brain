@@ -21,3 +21,5 @@ export const PAGE_TITLE = {
     [PageType.Settings]: 'Settings',
     [PageType.SigIn]: 'SigIn',
 };
+
+export const UTC_DATE_FORMAT = '';
