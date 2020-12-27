@@ -1,10 +1,10 @@
-export const enum TaskStatus {
+export enum TaskStatus {
     Progress = 'progress',
     Removed = 'removed',
     Done = 'done',
 }
 
-export const enum FolderType {
+export enum FolderType {
     Project = 'project',
     Information = 'information',
 }
