@@ -39,7 +39,7 @@
         "react-hooks/exhaustive-deps": [
             "warn",
             {
-                "additionalHooks": "(useTypedQuery|useTypedParams)"
+                "additionalHooks": "(useEqualMemo)"
             }
         ],
         "jsx-a11y/label-has-associated-control": 0,
