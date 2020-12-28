@@ -23,7 +23,7 @@ type UserReponse = {
 
 export const usersApi = makeApi({
     request: async () => {
-        const {data} = await http.get<never, UserReponse>('https://reqres.in/api/users');
+        const {data} = await http.get<void, UserReponse>('https://reqres.in/api/users');
         return data;
     },
 });
