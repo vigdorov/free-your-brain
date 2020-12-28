@@ -39,7 +39,7 @@
         "react-hooks/exhaustive-deps": [
             "warn",
             {
-                "additionalHooks": "(useEqualMemo)"
+                "additionalHooks": "(useEqualMemo|useStream)"
             }
         ],
         "jsx-a11y/label-has-associated-control": 0,

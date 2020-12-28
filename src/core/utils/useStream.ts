@@ -1,32 +1,33 @@
+import {Sink, Stream} from '@most/types';
+import {noop} from 'lodash';
 import {useEffect, useState} from 'react';
-import {Stream, Sink} from '@most/types';
 import {newDefaultScheduler} from '@most/scheduler';
-import {pending, RemoteData} from '@devexperts/remote-data-ts';
 
-// eslint-disable-next-line
-const emptyFunc = () => {};
-
-export const useStream = <T>(stream$: Stream<T>, defaultValue: T): T => {
-    const [state, setState] = useState(defaultValue);
-
+export function useStream<T extends Array<unknown>, R>(
+    piping: () => Stream<R>,
+    props: T,
+) {
+    const [state, setState] = useState<R>();
     useEffect(() => {
-        const sink: Sink<T> = {
+        setState(undefined);
+    // eslint-disable-next-line
+    }, props);
+    useEffect(() => {
+        const effect$ = piping();
+        const sink: Sink<R> = {
             event: (_, val) => {
                 setState(val);
             },
-            end: emptyFunc,
-            error: emptyFunc
+            end: noop,
+            error: noop
         };
+        const unsub = effect$.run(sink, newDefaultScheduler());
 
-        const effect$ = stream$.run(sink, newDefaultScheduler());
         return () => {
-            effect$.dispose();
+            unsub.dispose();
         };
-    }, [stream$]);
+    // eslint-disable-next-line
+    }, props);
 
     return state;
-};
-
-export const useStreamRD = <T, E = Error>(stream$: Stream<RemoteData<E, T>>): RemoteData<E, T> => {
-    return useStream(stream$, pending);
-};
+}

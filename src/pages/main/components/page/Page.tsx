@@ -1,15 +1,15 @@
 import React, {memo} from 'react';
 import {useStream} from '_utils/useStream';
 import {tasksService} from '_services/TasksService';
+
 import {List, ListItem, ListItemIcon, ListItemText} from '@material-ui/core';
 import InboxIcon from '@material-ui/icons/Inbox';
 
 const MainPage: React.FC = () => {
-    const taskList = useStream(tasksService.stream$, []);
-
+    const taskList = useStream(() => tasksService.stream$, []);
     return (
         <List component="nav" aria-label="main mailbox folders">
-            {taskList.map(task => (
+            {taskList?.map(task => (
                 <ListItem button key={task.id}>
                     <ListItemIcon>
                         <InboxIcon />
