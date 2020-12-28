@@ -23,6 +23,17 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      # eslint
-      - name: lint check
-        run: npm i && npm run lint && npm run test && npm run build
+      - name: install dependencies
+        run: npm i
+      
+      - name: eslint
+        run: npm run eslint
+      
+      - name: tsc lint
+        run: npm run tsc
+      
+      - name: tests
+        run: npm run test
+      
+      - name: build
+        run: npm run build
