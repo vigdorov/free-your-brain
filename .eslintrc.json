@@ -55,6 +55,7 @@
         "class-methods-use-this": 0,
         "react/prefer-stateless-function": 0,
         "react/jsx-fragments": 0,
+        "react/jsx-key": "warn",
         "react/no-array-index-key": 0,
         "react/destructuring-assignment": 0,
         "no-console": [
@@ -95,6 +96,7 @@
         "@typescript-eslint/no-namespace": "off",
         "@typescript-eslint/explicit-module-boundary-types": "off",
         "@typescript-eslint/no-unused-vars": ["error"],
+        "@typescript-eslint/no-explicit-any": "off",
         "array-bracket-spacing": ["warn", "never"],
         "block-spacing": ["warn", "never"],
         "brace-style": ["warn", "1tbs", {"allowSingleLine": true}],
