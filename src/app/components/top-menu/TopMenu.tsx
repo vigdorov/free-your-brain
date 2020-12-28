@@ -1,12 +1,14 @@
-import React, {memo} from 'react';
+import React, {memo, SyntheticEvent, useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import {createStyles, makeStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
+import TextField from '@material-ui/core/TextField';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import SearchIcon from '@material-ui/icons/Search';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import {Avatar} from '@material-ui/core';
 import {PageType} from '_enums/common';
 import {PAGE_TITLE} from '_consts/common';
@@ -25,10 +27,14 @@ const useStyles = makeStyles(() =>
             display: 'flex',
             justifyContent: 'center',
         },
+        input: {
+            backgroundColor: 'white',
+        },
     }),
 );
 
 const TopMenu: React.FC = () => {
+    const [isSearch, setIsSearch] = useState(false);
     const classes = useStyles();
     const pageType = usePageType();
     const history = useHistory();
@@ -37,18 +43,42 @@ const TopMenu: React.FC = () => {
         history.push(buildPath({pageType: PageType.Main}));
     };
 
+    const handleToggleSearch = () => {
+        setIsSearch(!isSearch);
+    };
+
+    const handleClickAway = () => {
+        setIsSearch(false);
+    };
+
     const title = PAGE_TITLE[pageType];
     return (
         <div className={classes.root}>
             <AppBar position="static">
                 <Toolbar>
                     {pageType === PageType.Main && (
-                        <IconButton
-                            edge="start"
-                            color="inherit"
-                        >
-                            <SearchIcon />
-                        </IconButton>
+                        <>
+                            {
+                                isSearch ?
+                                    <ClickAwayListener onClickAway={handleClickAway}>
+                                        <TextField
+                                            label="Search"
+                                            id="outlined-size-small"
+                                            defaultValue=""
+                                            variant="outlined"
+                                            size="small"
+                                            className={classes.input}
+                                        />
+                                    </ClickAwayListener>
+                                    :
+                                    <IconButton
+                                        edge="start"
+                                        color="inherit"
+                                    >
+                                        <SearchIcon onClick={handleToggleSearch} />
+                                    </IconButton>
+                            }
+                        </>
                     )}
                     {pageType !== PageType.Main && (
                         <IconButton
@@ -59,14 +89,12 @@ const TopMenu: React.FC = () => {
                             <ArrowBackIosIcon />
                         </IconButton>
                     )}
-
-                    <Typography
-                        variant="h6"
-                        className={classes.title}
-                    >
-                        {title}
-                    </Typography>
-
+                        <Typography
+                            variant="h6"
+                            className={classes.title}
+                        >
+                           {isSearch ? '' : title }
+                        </Typography>
                     <Avatar src={NO_NAME_AVATAR} />
                 </Toolbar>
             </AppBar>
