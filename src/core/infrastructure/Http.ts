@@ -1,53 +1,51 @@
-import axios, {AxiosRequestConfig, AxiosResponse} from 'axios';
+import axios, {AxiosRequestConfig} from 'axios';
 
-type RequestConfig<Q> = Omit<AxiosRequestConfig, 'params'> & {
-    params: Q;
+enum Method {
+    Get = 'get',
+    Delete = 'delete',
+    Head = 'head',
+    Options = 'options',
+    Post = 'post',
+    Put = 'put',
+    Patch = 'patch',
+}
+
+type RequestConfig<Q, B> = Omit<AxiosRequestConfig, 'params' | 'data'> & {
+    params?: Q;
+    data?: B;
+};
+
+const requestMiddleware = async <Q, B, R>(config: RequestConfig<Q, B>): Promise<R> => {
+    const axiosResponse = await axios.request<R>(config);
+    // Добавить обработку ошибок
+    return axiosResponse.data;
+};
+
+const request = <Q, B, R>(config: RequestConfig<Q, B>) => requestMiddleware<Q, B, R>(config);
+
+const requestWithoutBody = (method: Method) => <Q, R>(url: string, query?: Q) => {
+    return request<Q, never, R>({
+        method,
+        url,
+        params: query,
+    });
+};
+
+const requestWithBody = (method: Method) => <Q, B, R>(url: string, query?: Q, body?: B) => {
+    return request<Q, B, R>({
+        method,
+        url,
+        params: query,
+        data: body,
+    });
 };
 
 export const http = {
-    get: <Query, Response>(
-        url: string,
-        config: RequestConfig<Query>
-    ): Promise<AxiosResponse<Response>> => {
-        return axios.get<Response>(url, config);
-    },
-    delete: <Query, Response>(
-        url: string,
-        config: RequestConfig<Query>
-    ): Promise<AxiosResponse<Response>> => {
-        return axios.delete<Response>(url, config);
-    },
-    head: <Query, Response>(
-        url: string,
-        config: RequestConfig<Query>
-    ): Promise<AxiosResponse<Response>> => {
-        return axios.head<Response>(url, config);
-    },
-    options: <Query, Response>(
-        url: string,
-        config: RequestConfig<Query>
-    ): Promise<AxiosResponse<Response>> => {
-        return axios.options<Response>(url, config);
-    },
-    post: <Query, Body, Response>(
-        url: string,
-        body: Body,
-        config: RequestConfig<Query>
-    ): Promise<AxiosResponse<Response>> => {
-        return axios.post<Response>(url, body, config);
-    },
-    put: <Query, Body, Response>(
-        url: string,
-        body: Body,
-        config: RequestConfig<Query>
-    ): Promise<AxiosResponse<Response>> => {
-        return axios.post<Response>(url, body, config);
-    },
-    patch: <Query, Body, Response>(
-        url: string,
-        body: Body,
-        config: RequestConfig<Query>
-    ): Promise<AxiosResponse<Response>> => {
-        return axios.post<Response>(url, body, config);
-    },
+    get: requestWithoutBody(Method.Get),
+    delete: requestWithoutBody(Method.Delete),
+    head: requestWithoutBody(Method.Head),
+    options: requestWithoutBody(Method.Options),
+    post: requestWithBody(Method.Post),
+    put: requestWithBody(Method.Put),
+    patch: requestWithBody(Method.Patch),
 };
