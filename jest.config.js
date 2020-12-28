@@ -89,8 +89,8 @@ module.exports = {
         '^_types(.*)$': '<rootDir>/src/core/types$1',
         '^_utils(.*)$': '<rootDir>/src/core/utils$1',
         '^_enums(.*)$': '<rootDir>/src/core/enums$1',
+        '^_referers(.*)$': '<rootDir>/src/core/referers$1',
         '^_pages(.*)$': '<rootDir>/src/pages$1',
-        '^_referers(.*)$': '<rootDir>/src/referers$1',
     },
 
     // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader

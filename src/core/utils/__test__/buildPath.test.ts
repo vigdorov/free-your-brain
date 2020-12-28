@@ -1,4 +1,4 @@
-import {PageType} from '../../enums/common';
+import {PageType} from '_enums/common';
 import {buildPath, BuildPathOptions} from '../buildPath';
 
 describe('buildPath', () => {

@@ -19,3 +19,9 @@ export enum PageType {
     Settings = 'settings',
     SigIn = 'sign-in',
 }
+
+export enum Icon {
+    AcUnit = 'acUnit',
+    Apple = 'apple',
+    Apartment = 'apartment',
+}

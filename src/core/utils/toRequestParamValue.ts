@@ -1,4 +1,4 @@
-import {isNotEmpty} from '../referers/common';
+import {isNotEmpty} from '_referers/common';
 
 export function toRequestParamValue<T>(val: T): T;
 export function toRequestParamValue<T>(val?: T): Undefinable<T>;

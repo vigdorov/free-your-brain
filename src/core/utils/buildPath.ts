@@ -1,5 +1,5 @@
 import {decode, ParsedUrlQueryInput, stringify} from 'querystring';
-import {PageType} from '../enums/common';
+import {PageType} from '_enums/common';
 
 export type BuildPathOptions = {
     pageType: PageType;

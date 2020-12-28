@@ -1,5 +1,5 @@
 import ru from 'convert-layout/ru';
-import {isEmpty, isNotEmpty} from '../referers/common';
+import {isEmpty, isNotEmpty} from '_referers/common';
 
 export function performTextSearch<T, K extends keyof T>(items: T[], searchText: string, searchProperties: K[]) {
     if (isEmpty(items) || isEmpty(searchText)) {

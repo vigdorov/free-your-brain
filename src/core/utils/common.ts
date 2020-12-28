@@ -1,5 +1,5 @@
-import {PageType} from '../enums/common';
-import {isPageType} from '../referers/common';
+import {PageType} from '_enums/common';
+import {isPageType} from '_referers/common';
 
 export const numberToString = (num: number): string => num.toString();
 

@@ -1,6 +1,6 @@
 import {useMemo} from 'react';
 import {useLocation} from 'react-router-dom';
-import {getPageType} from '../utils/common';
+import {getPageType} from '_utils/common';
 
 export const usePageType = () => {
     const location = useLocation();
