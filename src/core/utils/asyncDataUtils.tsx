@@ -1,7 +1,7 @@
 import React, {ReactNode} from 'react';
-import {RemoteData, fold, map} from '@devexperts/remote-data-ts';
+import {RemoteData, fold, map as remoteDateMap} from '@devexperts/remote-data-ts';
 import {Stream} from '@most/types';
-import * as M from '@most/core';
+import {map} from '@most/core';
 import {pipe} from 'fp-ts/lib/pipeable';
 
 export const renderAsyncData = <E, A>(
@@ -20,7 +20,7 @@ export const mapRD = <E, A, R>(mapper: (val: A) => R) => {
     return (stream$: Stream<RemoteData<E, A>>): Stream<RemoteData<E, R>> => {
         return pipe(
             stream$,
-            M.map(val => map(mapper)(val))
+            map(val => remoteDateMap(mapper)(val))
         );
     };
 };

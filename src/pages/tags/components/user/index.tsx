@@ -1,6 +1,6 @@
 import React, {FC, memo} from 'react';
 import {pipe} from 'fp-ts/es6/pipeable';
-import * as M from '@most/core';
+import {at, chain, periodic, map} from '@most/core';
 
 import {useStream} from '_utils/useStream';
 import {usersApi} from '_api/usersTestApi';
@@ -16,10 +16,10 @@ const User: FC<Props> = () => {
     const user = useStream(() => {
         let i = 0;
         return pipe(
-            M.at(3000, undefined),
-            M.chain(() => usersApi.findById(id)),
-            M.chain(data => {
-                return pipe(M.periodic(1000), M.map(() => {
+            at(3000, undefined),
+            chain(() => usersApi.findById(id)),
+            chain(data => {
+                return pipe(periodic(1000), map(() => {
                     i = i + 1;
                     return {
                         ...data,

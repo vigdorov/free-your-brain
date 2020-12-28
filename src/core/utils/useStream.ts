@@ -1,10 +1,7 @@
 import {Sink, Stream} from '@most/types';
+import {noop} from 'lodash';
 import {useEffect, useState} from 'react';
 import {newDefaultScheduler} from '@most/scheduler';
-
-// eslint-disable-next-line
-const emptyFunc = () => {
-};
 
 export function useStream<T extends Array<unknown>, R>(
     piping: () => Stream<R>,
@@ -21,8 +18,8 @@ export function useStream<T extends Array<unknown>, R>(
             event: (_, val) => {
                 setState(val);
             },
-            end: emptyFunc,
-            error: emptyFunc
+            end: noop,
+            error: noop
         };
         const unsub = effect$.run(sink, newDefaultScheduler());
 
