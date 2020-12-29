@@ -3,7 +3,7 @@ import {FolderType, Icon, TaskStatus} from '_enums/common';
 import {Folder, Tag, Task} from '_types/common';
 
 // Псевдоданные
-export const TagList: Tag[] = [
+const TagList: Tag[] = [
     {id: '33', name: 'Tag', color: '#2fc036'},
     {id: '66', name: 'Tag', color: '#2fc036'},
     {id: '77', name: 'Tag', color: '#2fc036'},
@@ -21,7 +21,7 @@ export const TaskList: Task[] = [
     {id: v4(), title: 'Title number 1', body: 'Description', created_at: '2019-01-01T13:00', icon: Icon.Apple, status: TaskStatus.Progress, folder: '4'},
     {id: v4(), title: 'Title number 2', body: 'Description', created_at: '2019-01-01T13:00', icon: Icon.Apple, status: TaskStatus.Progress, folder: '4'},
     {id: v4(), title: 'Title number 3', body: 'Description', created_at: '2019-01-01T13:00', icon: Icon.Apple, status: TaskStatus.Progress, folder: '6'},
-    {id: v4(), title: 'Title number 4', body: 'Description', created_at: '2019-01-01T13:00', icon: Icon.Apple, status: TaskStatus.Progress, tags: ['33', '77']},
+    {id: v4(), title: 'Title number 4', body: 'Description', created_at: '2019-01-01T13:00', icon: Icon.Apple, status: TaskStatus.Progress, tags: TagList.map(t => t.id)},
     {id: v4(), title: 'Title number 5', body: 'Description', created_at: '2019-01-01T13:00', icon: Icon.Apple, status: TaskStatus.Progress},
     {id: v4(), title: 'Title number 6', body: 'Description', created_at: '2019-01-01T13:00', icon: Icon.Apple, status: TaskStatus.Progress},
     {id: v4(), title: 'Title number 7', body: 'Description', created_at: '2019-01-01T13:00', icon: Icon.Apple, status: TaskStatus.Progress, folder: '4'},

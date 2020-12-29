@@ -28,8 +28,9 @@
         "build": "webpack --mode=production",
         "eslint": "eslint -c .eslintrc.json src --fix",
         "tsc": "tsc --p ./tsconfig.json",
-        "lint": "npm run eslint && npm run tsc",
         "test": "jest",
+        "prune": "node scripts/find-unused-code",
+        "checks": "npm run eslint && npm run tsc && npm run prune && npm run test && npm run build",
         "clean": "rm -rf node_modules && rm -rf build"
     },
     "devDependencies": {
@@ -64,6 +65,7 @@
         "react-scripts": "^4.0.1",
         "sass": "^1.28.0",
         "sass-loader": "^10.0.4",
+        "ts-prune": "^0.8.4",
         "webpack": "^5.3.2",
         "webpack-cli": "^4.1.0",
         "webpack-dev-server": "^3.11.0"
