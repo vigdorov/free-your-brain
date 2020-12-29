@@ -32,6 +32,9 @@ jobs:
       - name: tsc lint
         run: npm run tsc
       
+      - name: search unused code
+        run: npm run prune
+      
       - name: tests
         run: npm run test
       
