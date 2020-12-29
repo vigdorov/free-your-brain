@@ -29,8 +29,8 @@
             "_types/*": ["./src/core/types/*"],
             "_utils/*": ["./src/core/utils/*"],
             "_enums/*": ["./src/core/enums/*"],
+            "_referers/*": ["./src/core/referers/*"],
             "_pages/*": ["./src/pages/*"],
-            "_referers/*": ["./src/referers/*"],
         }
     },
     "include": [

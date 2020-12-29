@@ -1,5 +1,7 @@
 import React, {Fragment, memo} from 'react';
 import {Route, Switch} from 'react-router-dom';
+import {Container, createStyles, makeStyles, useScrollTrigger} from '@material-ui/core';
+
 import mainPageRouter from '_pages/main/routing';
 import chaosBoxPageRouter from '_pages/chaos-box/routing';
 import calendarPageRouter from '_pages/calendar/routing';
@@ -13,26 +15,40 @@ import TopMenu from '../top-menu';
 import './Page.scss';
 import BothMenu from '../both-menu';
 
+const useStyles = makeStyles(() =>
+    createStyles({
+        container: {
+            height: '100hv',
+            display: 'flex',
+            flexDirection: 'column',
+        },
+    }),
+);
+
 const Page: React.FC = () => {
+    const classes = useStyles();
+    const trigger = useScrollTrigger();
     return (
         <Fragment>
-            <TopMenu />
-            <div>
-                <Switch>
-                    {mainPageRouter}
-                    {chaosBoxPageRouter}
-                    {calendarPageRouter}
-                    {informationPageRouter}
-                    {projectsPageRouter}
-                    {settingsPageRouter}
-                    {signInPageRouter}
-                    {tagsPageRouter}
-                    <Route>
-                        <NotFoundPage />
-                    </Route>
-                </Switch>
+            <div className={classes.container}>
+                <TopMenu trigger={trigger} />
+                <Container>
+                    <Switch>
+                        {mainPageRouter}
+                        {chaosBoxPageRouter}
+                        {calendarPageRouter}
+                        {informationPageRouter}
+                        {projectsPageRouter}
+                        {settingsPageRouter}
+                        {signInPageRouter}
+                        {tagsPageRouter}
+                        <Route>
+                            <NotFoundPage />
+                        </Route>
+                    </Switch>
+                </Container>
+                <BothMenu trigger={trigger} />
             </div>
-            <BothMenu />
         </Fragment>
     );
 };

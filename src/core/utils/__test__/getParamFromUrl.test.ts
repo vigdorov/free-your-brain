@@ -1,4 +1,4 @@
-import {PageType} from '../../enums/common';
+import {PageType} from '_enums/common';
 import {getParamsFromUrl} from '../getParamFromUrl';
 import {QueryParsers} from '../getQueryFromUrl';
 import {booleanParser, numberParser, stringParser} from '../queryParsers';

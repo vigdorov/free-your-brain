@@ -38,8 +38,8 @@ module.exports = {
             _services: path.resolve(__dirname, 'src/core/services/'),
             _utils: path.resolve(__dirname, 'src/core/utils/'),
             _enums: path.resolve(__dirname, 'src/core/enums/'),
+            _referers: path.resolve(__dirname, 'src/core/referers/'),
             _pages: path.resolve(__dirname, 'src/pages/'),
-            _referers: path.resolve(__dirname, 'src/referers/'),
         }
     },
     optimization: {

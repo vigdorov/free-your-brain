@@ -1,4 +1,4 @@
-import {FolderType, TaskStatus} from '../enums/common';
+import {FolderType, Icon, TaskStatus} from '_enums/common';
 
 export type Task = {
     /**
@@ -10,6 +10,7 @@ export type Task = {
     created_at: string;
     start_at?: string;
     end_at?: string;
+    icon?: Icon;
     /**
      * Контекст выполнения, теги
      */

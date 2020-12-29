@@ -1,7 +1,7 @@
 import {v4} from 'uuid';
-import {TaskStatus} from '../enums/common';
-import {Task} from '../types/common';
-import {createService} from '../utils/createService';
+import {TaskStatus} from '_enums/common';
+import {Task} from '_types/common';
+import {createService} from '_utils/createService';
 import {makeLocalStorageService} from './LocalStorageService';
 
 const TASK_STORAGE_NAME = 'FYB_TASK_STORAGE';
