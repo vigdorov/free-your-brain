@@ -1,5 +1,5 @@
 import {AppBar, createStyles, Fab, IconButton, makeStyles, Theme, Toolbar} from '@material-ui/core';
-import React, {memo} from 'react';
+import React, {memo, useCallback, useState} from 'react';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import AddIcon from '@material-ui/icons/Add';
 import MoveToInboxIcon from '@material-ui/icons/MoveToInbox';
@@ -7,6 +7,7 @@ import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import {NavLink} from 'react-router-dom';
 import {ROUTES} from '_consts/common';
+import ToggleMenu from '../toggle-menu';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -36,7 +37,16 @@ type Props = {
 };
 
 const BothMenu: React.FC<Props> = ({trigger}) => {
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const classes = useStyles();
+
+    const handleClick = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
+        setAnchorEl(event.currentTarget);
+    }, [setAnchorEl]);
+
+    const handleClose = useCallback(() => {
+        setAnchorEl(null);
+    }, [setAnchorEl]);
 
     return (
         <AppBar
@@ -81,9 +91,14 @@ const BothMenu: React.FC<Props> = ({trigger}) => {
                 <IconButton
                     edge="end"
                     color="inherit"
+                    onClick={handleClick}
                 >
                     <MoreIcon />
                 </IconButton>
+                <ToggleMenu
+                    anchorEl={anchorEl}
+                    handleClose={handleClose}
+                />
             </Toolbar>
         </AppBar>
     );
