@@ -6,6 +6,8 @@ import AddIcon from '@material-ui/icons/Add';
 import MoveToInboxIcon from '@material-ui/icons/MoveToInbox';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import ListAltIcon from '@material-ui/icons/ListAlt';
+import {NavLink} from 'react-router-dom';
+import {ROUTES} from '_consts/common';
 
 type Props = {
     trigger: boolean;
@@ -49,13 +51,17 @@ const BothMenu: React.FC<Props> = ({trigger}) => {
                         edge="start"
                         color="inherit"
                     >
-                        <MoveToInboxIcon />
+                        <NavLink to={ROUTES.CHAOS_BOX}>
+                            <MoveToInboxIcon />
+                        </NavLink>
                     </IconButton>
                     <IconButton
                         edge="end"
                         color="inherit"
                     >
-                        <ListAltIcon />
+                        <NavLink to={ROUTES.PROJECTS}>
+                            <ListAltIcon />
+                        </NavLink>
                     </IconButton>
                     <Fab
                         color="secondary"
@@ -69,7 +75,9 @@ const BothMenu: React.FC<Props> = ({trigger}) => {
                         edge="start"
                         color="inherit"
                     >
-                        <CalendarTodayIcon />
+                        <NavLink to={ROUTES.CALENDAR}>
+                            <CalendarTodayIcon />
+                        </NavLink>
                     </IconButton>
                     <IconButton
                         edge="end"
