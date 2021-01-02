@@ -1,4 +1,4 @@
-import React, {Fragment, memo, useCallback, useState} from 'react';
+import React, {memo, useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -15,7 +15,7 @@ import {PageType} from '_enums/common';
 import {PAGE_TITLE} from '_consts/common';
 import {usePageType} from '_hooks/usePageType';
 import {buildPath} from '_utils/buildPath';
-import {LABELS} from '../../consts';
+import {LABELS} from 'src/app/consts';
 
 type Props = {
     trigger: boolean;
@@ -36,12 +36,8 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-<<<<<<< HEAD
 const TopMenu: React.FC<Props> = ({trigger}) => {
-=======
-const TopMenu: React.FC = () => {
     const [isShowSearch, setShowSearch] = useState(false);
->>>>>>> Добавлено поле поиска в шапке
     const classes = useStyles();
     const pageType = usePageType();
     const history = useHistory();
@@ -50,17 +46,14 @@ const TopMenu: React.FC = () => {
         history.push(buildPath({pageType: PageType.Main}));
     };
 
-    const handleToggleSearch = useCallback(() => {
+    const handleToggleSearch = () => {
         setShowSearch(!isShowSearch);
-    },
-        [isShowSearch, setShowSearch]);
+    };
 
-const handleClickAway = useCallback(() => {
-    setShowSearch(false);
-},
-    [setShowSearch]);
+    const handleClickAway = () => {
+        setShowSearch(false);
+    };
 
-<<<<<<< HEAD
     const title = PAGE_TITLE[pageType];
     return (
         <Slide appear={false} direction="down" in={!trigger}>
@@ -110,57 +103,6 @@ const handleClickAway = useCallback(() => {
             </AppBar>
         </Slide>
     );
-=======
-const title = PAGE_TITLE[pageType];
-return (
-    <div className={classes.root}>
-        <AppBar position="static">
-            <Toolbar>
-                {pageType === PageType.Main && (
-                    <Fragment>
-                        {isShowSearch && (
-                            <ClickAwayListener onClickAway={handleClickAway}>
-                                <TextField
-                                    label={LABELS.SEACRH}
-                                    id="outlined-size-small"
-                                    defaultValue=""
-                                    variant="outlined"
-                                    size="small"
-                                    className={classes.searchInput}
-                                />
-                            </ClickAwayListener>
-                        )}
-                        {!isShowSearch && (
-                            <IconButton
-                                edge="start"
-                                color="inherit"
-                            >
-                                <SearchIcon onClick={handleToggleSearch} />
-                            </IconButton>
-                        )}
-                    </Fragment>
-                )}
-                {pageType !== PageType.Main && (
-                    <IconButton
-                        onClick={handleGoRoot}
-                        edge="start"
-                        color="inherit"
-                    >
-                        <ArrowBackIosIcon />
-                    </IconButton>
-                )}
-                <Typography
-                    variant="h6"
-                    className={classes.title}
-                >
-                    {isShowSearch ? '' : title}
-                </Typography>
-                <Avatar src={NO_NAME_AVATAR} />
-            </Toolbar>
-        </AppBar>
-    </div>
-);
->>>>>>> Исправлены недочеты после ревью
 };
 
 export default memo(TopMenu);

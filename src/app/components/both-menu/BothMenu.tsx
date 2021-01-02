@@ -1,17 +1,10 @@
 import {AppBar, createStyles, Fab, IconButton, makeStyles, Theme, Toolbar} from '@material-ui/core';
 import React, {memo} from 'react';
-import Slide from '@material-ui/core/Slide';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import AddIcon from '@material-ui/icons/Add';
 import MoveToInboxIcon from '@material-ui/icons/MoveToInbox';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import ListAltIcon from '@material-ui/icons/ListAlt';
-import {NavLink} from 'react-router-dom';
-import {ROUTES} from '_consts/common';
-
-type Props = {
-    trigger: boolean;
-}
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -36,58 +29,51 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const BothMenu: React.FC<Props> = ({trigger}) => {
+const BothMenu: React.FC = () => {
     const classes = useStyles();
 
     return (
-        <Slide appear={false} direction="up" in={!trigger}>
-            <AppBar
-                color="primary"
-                className={classes.appBar}
-            >
-                <Toolbar>
-                    <IconButton
-                        className={classes.iconRight}
-                        edge="start"
-                        color="inherit"
-                    >
-                        <NavLink to={ROUTES.CHAOS_BOX}>
-                            <MoveToInboxIcon />
-                        </NavLink>
-                    </IconButton>
-                    <IconButton
-                        edge="end"
-                        color="inherit"
-                    >
-                        <NavLink to={ROUTES.PROJECTS}>
-                            <ListAltIcon />
-                        </NavLink>
-                    </IconButton>
-                    <Fab
-                        color="secondary"
-                        className={classes.fabButton}
-                    >
-                        <AddIcon />
-                    </Fab>
-                    <div className={classes.grow} />
-                    <IconButton
-                        className={classes.iconRight}
-                        edge="start"
-                        color="inherit"
-                    >
-                        <NavLink to={ROUTES.CALENDAR}>
-                            <CalendarTodayIcon />
-                        </NavLink>
-                    </IconButton>
-                    <IconButton
-                        edge="end"
-                        color="inherit"
-                    >
-                        <MoreIcon />
-                    </IconButton>
-                </Toolbar>
-            </AppBar>
-        </Slide>
+        <AppBar
+            position="fixed"
+            color="primary"
+            className={classes.appBar}
+        >
+            <Toolbar>
+                <IconButton
+                    className={classes.iconRight}
+                    edge="start"
+                    color="inherit"
+                >
+                    <MoveToInboxIcon />
+                </IconButton>
+                <IconButton
+                    edge="end"
+                    color="inherit"
+                >
+                    <ListAltIcon />
+                </IconButton>
+                <Fab
+                    color="secondary"
+                    className={classes.fabButton}
+                >
+                    <AddIcon />
+                </Fab>
+                <div className={classes.grow} />
+                <IconButton
+                    className={classes.iconRight}
+                    edge="start"
+                    color="inherit"
+                >
+                    <CalendarTodayIcon />
+                </IconButton>
+                <IconButton
+                    edge="end"
+                    color="inherit"
+                >
+                    <MoreIcon />
+                </IconButton>
+            </Toolbar>
+        </AppBar>
     );
 };
 
