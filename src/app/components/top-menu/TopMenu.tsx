@@ -15,7 +15,7 @@ import {PageType} from '_enums/common';
 import {PAGE_TITLE} from '_consts/common';
 import {usePageType} from '_hooks/usePageType';
 import {buildPath} from '_utils/buildPath';
-import {LABELS} from 'src/app/consts';
+import {LABELS} from '../../consts';
 
 type Props = {
     trigger: boolean;

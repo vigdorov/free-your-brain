@@ -29,7 +29,11 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const BothMenu: React.FC = () => {
+type Props = {
+    trigger: boolean;
+};
+
+const BothMenu: React.FC<Props> = ({trigger}) => {
     const classes = useStyles();
 
     return (
