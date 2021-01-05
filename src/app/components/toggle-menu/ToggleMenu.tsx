@@ -1,33 +1,43 @@
-import React, {Fragment, memo} from 'react';
+import React, {Fragment, memo, PropsWithChildren, useCallback, useMemo, useState} from 'react';
+import {v4} from 'uuid';
 import {Menu, MenuItem} from '@material-ui/core';
 import {NavLink} from 'react-router-dom';
-import {ROUTES} from '_consts/common';
+import {BOTH_MENU_LINKS} from '../../consts';
 
-type Props = {
-    anchorEl: null | HTMLElement;
-    handleClose: () => void;
-}
+type Props = PropsWithChildren<{
+}>;
 
-const ToggleMenu: React.FC<Props> = ({anchorEl, handleClose}) => {
+const ToggleMenu: React.FC<Props> = ({children}) => {
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+    const handleClick = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
+        setAnchorEl(event.currentTarget);
+    }, [setAnchorEl]);
+
+    const handleClose = useCallback(() => {
+        setAnchorEl(null);
+    }, [setAnchorEl]);
+
+    const isOpenMenu = useMemo(() => Boolean(anchorEl), [anchorEl]);
+
     return (
         <Fragment>
             <Menu
                 id="simple-menu"
                 anchorEl={anchorEl}
                 keepMounted
-                open={Boolean(anchorEl)}
+                open={isOpenMenu}
                 onClose={handleClose}
             >
-                <NavLink to={ROUTES.TAGS}>
-                    <MenuItem onClick={handleClose}>Tags</MenuItem>
-                </NavLink>
-                <NavLink to={ROUTES.SETTINGS}>
-                    <MenuItem onClick={handleClose}>Settings</MenuItem>
-                </NavLink>
-                <NavLink to={ROUTES.INFORMATION}>
-                    <MenuItem onClick={handleClose}>Information</MenuItem>
-                </NavLink>
+                {
+                    BOTH_MENU_LINKS.map(item => <NavLink to={item.url} key={v4()}>
+                        <MenuItem onClick={handleClose}>{item.name}</MenuItem>
+                    </NavLink>)
+                }
             </Menu>
+            <div onClick={handleClick}>
+                {children}
+            </div>
         </Fragment>
     );
 };
