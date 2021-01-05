@@ -1,4 +1,5 @@
 import {AppBar, createStyles, Fab, IconButton, makeStyles, Theme, Toolbar} from '@material-ui/core';
+import Slide from '@material-ui/core/Slide';
 import React, {memo} from 'react';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import AddIcon from '@material-ui/icons/Add';
@@ -7,6 +8,8 @@ import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import {NavLink} from 'react-router-dom';
 import {ROUTES} from '_consts/common';
+import ToggleMenu from '../toggle-menu';
+import {BOTH_MENU_LINKS} from '../../consts';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -39,53 +42,57 @@ const BothMenu: React.FC<Props> = ({trigger}) => {
     const classes = useStyles();
 
     return (
-        <AppBar
-            position="fixed"
-            color="primary"
-            className={classes.appBar}
-        >
-            <Toolbar>
-                <IconButton
-                    className={classes.iconRight}
-                    edge="start"
-                    color="inherit"
-                >
-                    <NavLink to={ROUTES.CHAOS_BOX}>
-                        <MoveToInboxIcon />
-                    </NavLink>
-                </IconButton>
-                <IconButton
-                    edge="end"
-                    color="inherit"
-                >
-                    <NavLink to={ROUTES.PROJECTS}>
-                        <ListAltIcon />
-                    </NavLink>
-                </IconButton>
-                <Fab
-                    color="secondary"
-                    className={classes.fabButton}
-                >
-                    <AddIcon />
-                </Fab>
-                <div className={classes.grow} />
-                <IconButton
-                    className={classes.iconRight}
-                    edge="start"
-                    color="inherit"
-                >
-                    <NavLink to={ROUTES.CALENDAR}>
-                        <CalendarTodayIcon />
-                    </NavLink>
-                </IconButton>
-                <IconButton
-                    edge="end"
-                    color="inherit"
-                >
-                    <MoreIcon />
-                </IconButton>
-            </Toolbar>
-        </AppBar>
+        <Slide appear={false} direction="up" in={!trigger}>
+            <AppBar
+                position="fixed"
+                color="primary"
+                className={classes.appBar}
+            >
+                <Toolbar>
+                    <IconButton
+                        className={classes.iconRight}
+                        edge="start"
+                        color="inherit"
+                    >
+                        <NavLink to={ROUTES.CHAOS_BOX}>
+                            <MoveToInboxIcon />
+                        </NavLink>
+                    </IconButton>
+                    <IconButton
+                        edge="end"
+                        color="inherit"
+                    >
+                        <NavLink to={ROUTES.PROJECTS}>
+                            <ListAltIcon />
+                        </NavLink>
+                    </IconButton>
+                    <Fab
+                        color="secondary"
+                        className={classes.fabButton}
+                    >
+                        <AddIcon />
+                    </Fab>
+                    <div className={classes.grow} />
+                    <IconButton
+                        className={classes.iconRight}
+                        edge="start"
+                        color="inherit"
+                    >
+                        <NavLink to={ROUTES.CALENDAR}>
+                            <CalendarTodayIcon />
+                        </NavLink>
+                    </IconButton>
+                    <ToggleMenu items={BOTH_MENU_LINKS}>
+                        <IconButton
+                            edge="end"
+                            color="inherit"
+                        >
+                            <MoreIcon />
+                        </IconButton>
+                    </ToggleMenu>
+                </Toolbar>
+            </AppBar>
+        </Slide>
     );
 };
 
