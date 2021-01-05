@@ -25,3 +25,9 @@ export enum Icon {
     Apple = 'apple',
     Apartment = 'apartment',
 }
+
+export enum CommonApiName {
+    TaskList = 'taskList',
+    FolderList = 'folderList',
+    TagList = 'tagList',
+}
