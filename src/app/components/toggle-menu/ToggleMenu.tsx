@@ -32,11 +32,11 @@ const ToggleMenu: React.FC<Props> = ({items, children}) => {
                 open={isOpenMenu}
                 onClose={handleClose}
             >
-                {
-                    items.map(item => <NavLink to={item.url} key={v4()}>
+                {items.map(item => (
+                    <NavLink to={item.url} key={v4()}>
                         <MenuItem onClick={handleClose}>{item.name}</MenuItem>
                     </NavLink>)
-                }
+                )}
             </Menu>
             <div onClick={handleClick}>
                 {children}
