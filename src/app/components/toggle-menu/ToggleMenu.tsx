@@ -2,12 +2,15 @@ import React, {Fragment, memo, PropsWithChildren, useCallback, useMemo, useState
 import {v4} from 'uuid';
 import {Menu, MenuItem} from '@material-ui/core';
 import {NavLink} from 'react-router-dom';
-import {BOTH_MENU_LINKS} from '../../consts';
 
 type Props = PropsWithChildren<{
+    items: {
+        url: string,
+        name: string
+    }[],
 }>;
 
-const ToggleMenu: React.FC<Props> = ({children}) => {
+const ToggleMenu: React.FC<Props> = ({items, children}) => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
     const handleClick = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
@@ -30,7 +33,7 @@ const ToggleMenu: React.FC<Props> = ({children}) => {
                 onClose={handleClose}
             >
                 {
-                    BOTH_MENU_LINKS.map(item => <NavLink to={item.url} key={v4()}>
+                    items.map(item => <NavLink to={item.url} key={v4()}>
                         <MenuItem onClick={handleClose}>{item.name}</MenuItem>
                     </NavLink>)
                 }

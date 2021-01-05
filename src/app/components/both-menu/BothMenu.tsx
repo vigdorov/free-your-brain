@@ -9,6 +9,7 @@ import ListAltIcon from '@material-ui/icons/ListAlt';
 import {NavLink} from 'react-router-dom';
 import {ROUTES} from '_consts/common';
 import ToggleMenu from '../toggle-menu';
+import {BOTH_MENU_LINKS} from '../../consts';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -81,7 +82,7 @@ const BothMenu: React.FC<Props> = ({trigger}) => {
                             <CalendarTodayIcon />
                         </NavLink>
                     </IconButton>
-                    <ToggleMenu>
+                    <ToggleMenu items={BOTH_MENU_LINKS}>
                         <IconButton
                             edge="end"
                             color="inherit"
