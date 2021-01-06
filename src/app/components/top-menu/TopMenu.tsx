@@ -1,5 +1,5 @@
 import React, {memo, useState} from 'react';
-import {useHistory} from 'react-router-dom';
+import {NavLink, useHistory} from 'react-router-dom';
 import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -12,7 +12,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import {Avatar} from '@material-ui/core';
 import {PageType} from '_enums/common';
-import {PAGE_TITLE} from '_consts/common';
+import {PAGE_TITLE, ROUTES} from '_consts/common';
 import {usePageType} from '_hooks/usePageType';
 import {buildPath} from '_utils/buildPath';
 import {LABELS} from '../../consts';
@@ -98,7 +98,9 @@ const TopMenu: React.FC<Props> = ({trigger}) => {
                     >
                         {isShowSearch ? '' : title}
                     </Typography>
-                    <Avatar src={NO_NAME_AVATAR} />
+                    <NavLink to={ROUTES.SIGN_IN}>
+                        <Avatar src={NO_NAME_AVATAR} />
+                    </NavLink>
                 </Toolbar>
             </AppBar>
         </Slide>
