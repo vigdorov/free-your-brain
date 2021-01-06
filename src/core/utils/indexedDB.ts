@@ -41,11 +41,10 @@ export const openConnection = (
     });
 };
 
-const makeStore = async (
+const makeTransaction = (
     connection: Promise<IDBDatabase>,
     storeName: string,
-    mode: TransactionMode
-): Promise<IDBObjectStore> => {
+) => async (mode: TransactionMode): Promise<IDBObjectStore> => {
     const db = await connection;
     const transaction = db.transaction(storeName, mode);
     return transaction.objectStore(storeName);
@@ -60,21 +59,24 @@ const makeStoreRequest = <T>(request: IDBRequest): Promise<T> => new Promise((re
     });
 });
 
-export const makeStoreObject = <T>(connection: Promise<IDBDatabase>, storeName: string) => ({
-    getAll: async () => {
-        const store = await makeStore(connection, storeName, TransactionMode.ReadOnly);
-        return makeStoreRequest<Array<T>>(store.getAll());
-    },
-    add: async (task: T) => {
-        const store = await makeStore(connection, storeName, TransactionMode.ReadWrite);
-        return makeStoreRequest<void>(store.add(task));
-    },
-    put: async (task: T) => {
-        const store = await makeStore(connection, storeName, TransactionMode.ReadWrite);
-        return makeStoreRequest<void>(store.put(task));
-    },
-    delete: async (id: string) => {
-        const store = await makeStore(connection, storeName, TransactionMode.ReadWrite);
-        return makeStoreRequest<void>(store.delete(id));
-    },
-});
+export const makeStoreObject = <T>(connection: Promise<IDBDatabase>, storeName: string) => {
+    const makeStore = makeTransaction(connection, storeName);
+    return {
+        getAll: async () => {
+            const store = await makeStore(TransactionMode.ReadOnly);
+            return makeStoreRequest<Array<T>>(store.getAll());
+        },
+        add: async (task: T) => {
+            const store = await makeStore(TransactionMode.ReadWrite);
+            return makeStoreRequest<void>(store.add(task));
+        },
+        put: async (task: T) => {
+            const store = await makeStore(TransactionMode.ReadWrite);
+            return makeStoreRequest<void>(store.put(task));
+        },
+        delete: async (id: string) => {
+            const store = await makeStore(TransactionMode.ReadWrite);
+            return makeStoreRequest<void>(store.delete(id));
+        },
+    };
+};
