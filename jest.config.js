@@ -1,3 +1,5 @@
+const aliases = require('./scripts/create-symlinks/config.json');
+
 // For a detailed explanation regarding each configuration property, visit:
 // https://jestjs.io/docs/en/configuration.html
 
@@ -79,19 +81,10 @@ module.exports = {
     // ],
 
     // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
-    moduleNameMapper: {
-        '^_api(.*)$': '<rootDir>/src/core/api$1',
-        '^_blocks(.*)$': '<rootDir>/src/core/blocks$1',
-        '^_consts(.*)$': '<rootDir>/src/core/consts$1',
-        '^_hooks(.*)$': '<rootDir>/src/core/hooks$1',
-        '^_hoks(.*)$': '<rootDir>/src/core/hoks$1',
-        '^_services(.*)$': '<rootDir>/src/core/services$1',
-        '^_types(.*)$': '<rootDir>/src/core/types$1',
-        '^_utils(.*)$': '<rootDir>/src/core/utils$1',
-        '^_enums(.*)$': '<rootDir>/src/core/enums$1',
-        '^_referers(.*)$': '<rootDir>/src/core/referers$1',
-        '^_pages(.*)$': '<rootDir>/src/pages$1',
-    },
+    moduleNameMapper: Object.entries(aliases).reduce((acc, [key, aliasPath]) => ({
+        ...acc,
+        [`^${key}(.*)$`]: `<rootDir>/${aliasPath}$1`,
+    }), {}),
 
     // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
     // modulePathIgnorePatterns: [],
