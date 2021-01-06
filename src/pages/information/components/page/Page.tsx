@@ -1,12 +1,17 @@
+import {combine} from '@most/core';
 import React, {Fragment, memo} from 'react';
 import {isNotEmpty} from '_referers/common';
 import {makeTreeList} from '_utils/makeTreeList';
-import {FolderList, TaskList} from '../../consts';
+import {commonApi} from '_api/commonApi';
+import {useStream} from '_utils/useStream';
 import InfoList from '../info-list';
 
-const tree = makeTreeList(FolderList, TaskList);
+const stream$ = combine((taskList, folderList) => {
+    return makeTreeList(folderList, taskList);
+}, commonApi.taskList.getAll(), commonApi.folderList.getAll());
 
 const Page: React.FC = () => {
+    const tree = useStream(() => stream$, []);
     return (
         <Fragment>
             {isNotEmpty(tree) && (
