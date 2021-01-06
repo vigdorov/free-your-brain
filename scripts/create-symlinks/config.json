@@ -1,0 +1,14 @@
+{
+    "_api": "src/core/api",
+    "_blocks": "src/core/blocks",
+    "_consts": "src/core/consts",
+    "_hooks": "src/core/hooks",
+    "_hoks": "src/core/hoks",
+    "_services": "src/core/services",
+    "_types": "src/core/types",
+    "_utils": "src/core/utils",
+    "_infrastructure": "src/core/infrastructure",
+    "_enums": "src/core/enums",
+    "_referers": "src/core/referers",
+    "_pages": "src/pages"
+}

@@ -22,8 +22,9 @@
         "typescript": "^4.0.3"
     },
     "scripts": {
+        "symlinks": "node scripts/create-symlinks/index",
         "start": "webpack serve",
-        "init": "npm run clean && npm i",
+        "init": "npm run clean && npm i && npm run symlinks",
         "dev": "webpack serve --open false",
         "build": "webpack --mode=production",
         "eslint": "eslint -c .eslintrc.json src --fix",

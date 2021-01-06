@@ -1,5 +1,5 @@
 import {makeApi} from '_utils/makeApi';
-import {http} from '../infrastructure/Http';
+import {http} from '_infrastructure/Http';
 
 type User = {
     id: number;

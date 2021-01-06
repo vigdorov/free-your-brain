@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
+const aliases = require('./scripts/create-symlinks/config.json');
 
 module.exports = {
     mode: 'development',
@@ -28,19 +29,10 @@ module.exports = {
     },
     resolve: {
         extensions: ['.tsx', '.ts', '.js'],
-        alias: {
-            _types: path.resolve(__dirname, 'src/core/types/'),
-            _api: path.resolve(__dirname, 'src/core/api/'),
-            _blocks: path.resolve(__dirname, 'src/core/blocks/'),
-            _consts: path.resolve(__dirname, 'src/core/consts/'),
-            _hooks: path.resolve(__dirname, 'src/core/hooks/'),
-            _hoks: path.resolve(__dirname, 'src/core/hoks/'),
-            _services: path.resolve(__dirname, 'src/core/services/'),
-            _utils: path.resolve(__dirname, 'src/core/utils/'),
-            _enums: path.resolve(__dirname, 'src/core/enums/'),
-            _referers: path.resolve(__dirname, 'src/core/referers/'),
-            _pages: path.resolve(__dirname, 'src/pages/'),
-        }
+        alias: Object.entries(aliases).reduce((acc, [key, aliasPath]) => ({
+            ...acc,
+            [key]: path.resolve(__dirname, `${aliasPath}/`),
+        }), {}),
     },
     optimization: {
         splitChunks: {
