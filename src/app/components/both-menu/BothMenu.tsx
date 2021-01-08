@@ -10,6 +10,7 @@ import {NavLink} from 'react-router-dom';
 import {ROUTES} from '_consts/common';
 import ToggleMenu from '../toggle-menu';
 import {BOTH_MENU_LINKS} from '../../consts';
+import PopupList from '../popup-list/PopupList';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -39,7 +40,18 @@ type Props = {
 };
 
 const BothMenu: React.FC<Props> = ({trigger}) => {
+    const [open, setOpen] = React.useState(false);
+    const [selectedValue, setSelectedValue] = React.useState('');
     const classes = useStyles();
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = (value: string) => {
+        setOpen(false);
+        setSelectedValue(value);
+    };
 
     return (
         <Slide appear={false} direction="up" in={!trigger}>
@@ -70,7 +82,8 @@ const BothMenu: React.FC<Props> = ({trigger}) => {
                         color="secondary"
                         className={classes.fabButton}
                     >
-                        <AddIcon />
+                        <PopupList selectedValue={selectedValue} open={open} onClose={handleClose} />
+                        <AddIcon onClick={handleClickOpen} />
                     </Fab>
                     <div className={classes.grow} />
                     <IconButton

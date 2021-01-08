@@ -18,3 +18,5 @@ export const BOTH_MENU_LINKS = [
         url: ROUTES.INFORMATION
     }
 ];
+
+export const MENU_ADDS = ['Добавить задачу', 'Добавить папку', 'Добавить тег'];
