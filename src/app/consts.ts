@@ -2,6 +2,9 @@ import {ROUTES} from '_consts/common';
 
 export const LABELS = {
     SEACRH: 'Поиск',
+    ADD_TASK: 'Добавить задачу',
+    ADD_FOLDER: 'Добавить папку',
+    ADD_TAG: 'Добавить тег',
 } as const;
 
 export const BOTH_MENU_LINKS = [
@@ -18,3 +21,5 @@ export const BOTH_MENU_LINKS = [
         url: ROUTES.INFORMATION
     }
 ];
+
+export const MENU_ADDS = [LABELS.ADD_TASK, LABELS.ADD_FOLDER, LABELS.ADD_TAG];

@@ -10,6 +10,7 @@ import {NavLink} from 'react-router-dom';
 import {ROUTES} from '_consts/common';
 import ToggleMenu from '../toggle-menu';
 import {BOTH_MENU_LINKS} from '../../consts';
+import PopupList from '../popup-list/PopupList';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -30,6 +31,9 @@ const useStyles = makeStyles((theme: Theme) =>
             left: 0,
             right: 0,
             margin: '0 auto',
+        },
+        addButton: {
+            paddingTop: '5px'
         },
     }),
 );
@@ -70,7 +74,9 @@ const BothMenu: React.FC<Props> = ({trigger}) => {
                         color="secondary"
                         className={classes.fabButton}
                     >
-                        <AddIcon />
+                        <PopupList>
+                            <AddIcon className={classes.addButton} />
+                        </PopupList>
                     </Fab>
                     <div className={classes.grow} />
                     <IconButton
