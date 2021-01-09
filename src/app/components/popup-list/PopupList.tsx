@@ -3,7 +3,8 @@ import React, {Fragment, memo, PropsWithChildren, useCallback} from 'react';
 import {v4} from 'uuid';
 import {MENU_ADDS} from '../../consts';
 
-type Props = PropsWithChildren<void>;
+type Props = PropsWithChildren<{
+}>;
 
 const PopupList: React.FC<Props> = ({children}) => {
     const [open, setOpen] = React.useState(false);
