@@ -32,9 +32,6 @@ const useStyles = makeStyles((theme: Theme) =>
             right: 0,
             margin: '0 auto',
         },
-        addButton: {
-            paddingTop: '5px'
-        },
     }),
 );
 
@@ -70,14 +67,14 @@ const BothMenu: React.FC<Props> = ({trigger}) => {
                             <ListAltIcon />
                         </NavLink>
                     </IconButton>
-                    <Fab
-                        color="secondary"
-                        className={classes.fabButton}
-                    >
-                        <PopupList>
-                            <AddIcon className={classes.addButton} />
-                        </PopupList>
-                    </Fab>
+                    <PopupList>
+                        <Fab
+                            color="secondary"
+                            className={classes.fabButton}
+                        >
+                            <AddIcon />
+                        </Fab>
+                    </PopupList>
                     <div className={classes.grow} />
                     <IconButton
                         className={classes.iconRight}
@@ -98,7 +95,7 @@ const BothMenu: React.FC<Props> = ({trigger}) => {
                     </ToggleMenu>
                 </Toolbar>
             </AppBar>
-        </Slide>
+        </Slide >
     );
 };
 
