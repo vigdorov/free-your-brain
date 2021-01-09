@@ -5,6 +5,13 @@ export const LABELS = {
     ADD_TASK: 'Добавить задачу',
     ADD_FOLDER: 'Добавить папку',
     ADD_TAG: 'Добавить тег',
+    CREATE_TASK: 'Создание задачи',
+    CREATE: 'Создать',
+    CANCEL: 'Отмена',
+    TITLE: 'Заголовок',
+    DESCRIPTION: 'Описание',
+    START_AT: 'Начало',
+    END_AT: 'Окончание',
 } as const;
 
 export const BOTH_MENU_LINKS = [

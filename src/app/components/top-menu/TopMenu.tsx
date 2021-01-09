@@ -104,8 +104,9 @@ const TopMenu: React.FC<Props> = ({trigger}) => {
                                     <IconButton
                                         edge="start"
                                         color="inherit"
+                                        onClick={handleToggleSearch}
                                     >
-                                        <SearchIcon onClick={handleToggleSearch} />
+                                        <SearchIcon />
                                     </IconButton>
                                 )
                             }
