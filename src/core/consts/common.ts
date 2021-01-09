@@ -21,3 +21,5 @@ export const PAGE_TITLE = {
     [PageType.Settings]: 'Settings',
     [PageType.SigIn]: 'SigIn',
 };
+
+export const VIEW_DATE_TIME = 'yyyy-MM-dd\'T\'HH:mm';

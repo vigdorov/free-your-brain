@@ -47,7 +47,7 @@
         "import/extensions": 0,
         "react/prop-types": 0,
         "no-underscore-dangle": 0,
-        "import/imports-first": ["error", "absolute-first"],
+        "import/imports-first": ["warn", "absolute-first"],
         "import/prefer-default-export": 0,
         "import/no-unresolved": 0,
         "import/newline-after-import": "error",
