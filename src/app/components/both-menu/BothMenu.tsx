@@ -32,6 +32,9 @@ const useStyles = makeStyles((theme: Theme) =>
             right: 0,
             margin: '0 auto',
         },
+        addButton: {
+            paddingTop: '5px'
+        },
     }),
 );
 
@@ -40,18 +43,7 @@ type Props = {
 };
 
 const BothMenu: React.FC<Props> = ({trigger}) => {
-    const [open, setOpen] = React.useState(false);
-    const [selectedValue, setSelectedValue] = React.useState('');
     const classes = useStyles();
-
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = (value: string) => {
-        setOpen(false);
-        setSelectedValue(value);
-    };
 
     return (
         <Slide appear={false} direction="up" in={!trigger}>
@@ -82,8 +74,9 @@ const BothMenu: React.FC<Props> = ({trigger}) => {
                         color="secondary"
                         className={classes.fabButton}
                     >
-                        <PopupList selectedValue={selectedValue} open={open} onClose={handleClose} />
-                        <AddIcon onClick={handleClickOpen} />
+                        <PopupList>
+                            <AddIcon className={classes.addButton} />
+                        </PopupList>
                     </Fab>
                     <div className={classes.grow} />
                     <IconButton
