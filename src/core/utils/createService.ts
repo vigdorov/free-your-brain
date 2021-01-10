@@ -2,7 +2,7 @@ import {startWith} from '@most/core';
 import {createAdapter} from '@most/adapter';
 import {pipe} from 'fp-ts/es6/pipeable';
 
-type ServiceAction<State, ValType> = (data: State, val?: ValType) => State;
+type ServiceAction<State, ValType> = (data: State) => (val?: ValType) => State;
 
 type ServiceActions<State, T extends Record<string, ServiceAction<State, unknown>>> = {
     [Key in keyof T]: T[Key] extends ServiceAction<State, infer D>
@@ -23,7 +23,7 @@ export const createService = <State, Actions extends Record<string, ServiceActio
     const currActions = Object.entries(actions).reduce((acc, [key, func]) => {
         // eslint-disable-next-line
         (acc as any)[key] = (val: unknown) => {
-            currValue = func(currValue, val);
+            currValue = func(currValue)(val);
             handler(currValue);
         };
         return acc;

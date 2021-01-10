@@ -1,5 +1,5 @@
 import React, {Fragment, memo, useMemo} from 'react';
-import {Route, Switch} from 'react-router-dom';
+import {Route, Switch, useLocation} from 'react-router-dom';
 import {Container, createStyles, makeStyles, useScrollTrigger} from '@material-ui/core';
 import mainPageRouter from '_pages/main/routing';
 import chaosBoxPageRouter from '_pages/chaos-box/routing';
@@ -29,9 +29,12 @@ const useStyles = makeStyles(() =>
 );
 
 const Page: React.FC = () => {
+    const loc = useLocation();
+    console.log({loc})
     const classes = useStyles();
     const trigger = useScrollTrigger();
     const {modal} = useQuery(queryParsers);
+    console.log({modal})
     const isOpenCreateTaskModal = useMemo(() => modal === ModalType.CreateTask, [modal]);
     return (
         <Fragment>

@@ -11,6 +11,7 @@ import {ROUTES} from '_consts/common';
 import ToggleMenu from '../toggle-menu';
 import {BOTH_MENU_LINKS} from '../../consts';
 import PopupList from '../popup-list/PopupList';
+import {routeService} from '_services/routeService';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -42,6 +43,10 @@ type Props = {
 const BothMenu: React.FC<Props> = ({trigger}) => {
     const classes = useStyles();
 
+    const handleClick = () => {
+        routeService.actions.push({});
+    };
+
     return (
         <Slide appear={false} direction="up" in={!trigger}>
             <AppBar
@@ -54,10 +59,12 @@ const BothMenu: React.FC<Props> = ({trigger}) => {
                         className={classes.iconRight}
                         edge="start"
                         color="inherit"
+                        onClick={handleClick}
                     >
-                        <NavLink to={ROUTES.CHAOS_BOX}>
+                        хуй
+                        {/* <NavLink to={ROUTES.CHAOS_BOX}>
                             <MoveToInboxIcon />
-                        </NavLink>
+                        </NavLink> */}
                     </IconButton>
                     <IconButton
                         edge="end"
