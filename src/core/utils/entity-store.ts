@@ -6,18 +6,19 @@ import {array} from 'fp-ts/lib/Array';
 import {Predicate} from 'fp-ts/lib/function';
 import {pipe} from 'fp-ts/pipeable';
 import {noop} from 'lodash';
+
+import {isNotEmpty} from '_referers/common';
 import {LiveData} from '_types/LiveData';
 
-import {isNotEmpty} from '../referers/common';
 import {chainRD, mapRD, tapRD} from './asyncDataUtils';
 import {StreamMap} from './streamMap';
 
 export class EntityStore<L = never, A = never> {
-    get getAllValues$(): any {
+    get allValues$() {
         return this._getAllValues$;
     }
 
-    set getAllValues$(value: any) {
+    set allValues$(value: any) {
         this._getAllValues$ = value;
     }
 
@@ -60,7 +61,7 @@ export class EntityStore<L = never, A = never> {
     }
 
     getAll(
-        pk: (value: A) => string,
+        personalKey: (value: A) => string,
         partialGetAll: () => LiveData<L, A[]>,
         predicate?: Predicate<A>
     ): LiveData<L, A[]> {
@@ -69,7 +70,7 @@ export class EntityStore<L = never, A = never> {
             partialGetAll(),
             tapRD(values => {
                 this.hasLoadedAll = true;
-                this.updateCache(values, pk);
+                this.updateCache(values, personalKey);
             }),
             chain(data => {
                 this.cache.values$.run(
@@ -119,11 +120,11 @@ export class EntityStore<L = never, A = never> {
         );
     }
 
-    create(pk: (value: A) => string, create: () => LiveData<L, A>): LiveData<L, A> {
+    create(personalKey: (value: A) => string, create: () => LiveData<L, A>): LiveData<L, A> {
         return pipe(
             create(),
             chainRD(value => {
-                const key = pk(value);
+                const key = personalKey(value);
                 this.cache.set(key, success(value));
                 return this.cache.get(key);
             })
