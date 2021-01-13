@@ -1,23 +1,19 @@
-import React, {memo} from 'react';
-import {Link} from 'react-router-dom';
-import {usersApi} from '_api/usersTestApi';
+import React, {Fragment, memo} from 'react';
 import {useStream} from '_utils/useStream';
+import {commonApi} from '../../../../core/api/commonApi';
+import {isNotEmpty} from '../../../../core/referers/common';
+import TagList from '../tag-list';
 
-const userList$ = usersApi.request();
+const stream$ = commonApi.tagList.getAll();
 
 const Page: React.FC = () => {
-    const users = useStream(() => userList$, []);
-
+    const tags = useStream(() => stream$, []);
     return (
-        <div>
-            tags
-            {users?.map(user => (
-                <div key={user.id}>
-                    {user.first_name}, {user.last_name}
-                    <span><Link to={`/tags/${user.id}`}> More info...</Link></span>
-                </div>
-            ))}
-        </div>
+        <Fragment>
+            {isNotEmpty(tags) && (
+                <TagList list={tags} space={1} />
+            )}
+        </Fragment>
     );
 };
 
