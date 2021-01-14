@@ -1,7 +1,7 @@
 import {v4} from 'uuid';
 import {TaskStatus} from '_enums/common';
 import {Task} from '_types/common';
-import {createService} from '_utils/createService';
+import {createStore} from '_utils/createStore';
 import {makeLocalStorageService} from './LocalStorageService';
 
 const TASK_STORAGE_NAME = 'FYB_TASK_STORAGE';
@@ -32,5 +32,5 @@ const INIT_TASKS: Task[] = [
 
 const taskListService = makeLocalStorageService(INIT_TASKS, TASK_STORAGE_NAME);
 
-export const tasksService = createService(taskListService.get(), {
+export const tasksService = createStore(taskListService.get(), {
 });

@@ -13,7 +13,7 @@ type ServiceActions<State, T extends Record<string, ServiceAction<State, unknown
 };
 
 // eslint-disable-next-line
-export const createService = <State, Actions extends Record<string, ServiceAction<State, any>>>(
+export const createStore = <State, Actions extends Record<string, ServiceAction<State, any>>>(
     initData: State,
     actions: Actions
 ) => {

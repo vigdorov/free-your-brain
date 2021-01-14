@@ -1,7 +1,7 @@
 import {makeApi} from '_utils/makeApi';
 import {http} from '_infrastructure/Http';
 
-type User = {
+export type User = {
     id: number;
     avatar: string;
     email: string;
