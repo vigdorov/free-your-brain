@@ -1,22 +1,35 @@
 import {combine} from '@most/core';
+import {combine as combineRD, map} from '@devexperts/remote-data-ts';
+import {pipe} from 'fp-ts/lib/function';
 import React, {Fragment, memo} from 'react';
-import {isNotEmpty} from '_referers/common';
-import {makeTreeList} from '_utils/makeTreeList';
+
 import {commonApi} from '_api/commonApi';
-import {useStream} from '_utils/useStream';
+import {renderAsyncData} from '_utils/asyncDataUtils';
+import {makeTreeList} from '_utils/makeTreeList';
+import {useStreamRD} from '_utils/useStream';
+
 import InfoList from '../info-list';
 
-const stream$ = combine((taskList, folderList) => {
-    return makeTreeList(folderList, taskList);
-}, commonApi.taskList.getAll(), commonApi.folderList.getAll());
+const stream$ = combine(
+    (taskListRD, folderListRD) => {
+        return pipe(
+            combineRD(taskListRD, folderListRD),
+            map(([taskList, folderList]) => {
+                return makeTreeList(folderList, taskList);
+            })
+        );
+    },
+    commonApi.taskList.getAll(),
+    commonApi.folderList.getAll()
+);
 
 const Page: React.FC = () => {
-    const tree = useStream(() => stream$, []);
+    const treeRD = useStreamRD(() => stream$, []);
     return (
         <Fragment>
-            {isNotEmpty(tree) && (
+            {renderAsyncData(treeRD, tree => (
                 <InfoList list={tree} space={1} />
-            )}
+            ))}
         </Fragment>
     );
 };

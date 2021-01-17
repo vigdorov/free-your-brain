@@ -1,38 +1,44 @@
-import React, {FC, memo} from 'react';
-import {pipe} from 'fp-ts/es6/pipeable';
+import {success} from '@devexperts/remote-data-ts';
 import {at, chain, periodic, map} from '@most/core';
-
-import {useStream} from '_utils/useStream';
-import {usersApi} from '_api/usersTestApi';
+import {pipe} from 'fp-ts/es6/pipeable';
+import React, {FC, memo} from 'react';
 import {useParams} from 'react-router-dom';
+
+import {usersApi} from '_api/usersTestApi';
+import {chainRD, renderAsyncData} from '_utils/asyncDataUtils';
+import {useStreamRD} from '_utils/useStream';
 
 type Props = {
     id: string;
-}
+};
 
 const User: FC<Props> = () => {
     const {id} = useParams<Props>();
 
-    const user = useStream(() => {
+    const userRD = useStreamRD(() => {
         let i = 0;
         return pipe(
             at(3000, undefined),
             chain(() => usersApi.findById(id)),
-            chain(data => {
-                return pipe(periodic(1000), map(() => {
-                    i = i + 1;
-                    return {
-                        ...data,
-                        chainableNumber: i
-                    };
-                }));
+            chainRD(data => {
+                const res = pipe(
+                    periodic(1000),
+                    map(() => {
+                        i = i + 1;
+                        return success({
+                            ...data,
+                            chainableNumber: i
+                        });
+                    })
+                );
+                return res;
             })
         );
     }, [id]);
 
     return (
         <div>
-            {user ? (
+            {renderAsyncData(userRD, user => (
                 <div>
                     <div>{user.avatar}</div>
                     <div>{user.email}</div>
@@ -41,9 +47,7 @@ const User: FC<Props> = () => {
                     <div>{user.last_name}</div>
                     <div>{user.chainableNumber}</div>
                 </div>
-            ) : (
-                'Loading...'
-            )}
+            ))}
         </div>
     );
 };
