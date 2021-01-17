@@ -1,12 +1,9 @@
-import {pending, success} from '@devexperts/remote-data-ts';
-import {map} from '@most/core';
-import {pipe} from 'fp-ts/lib/function';
 import React, {FC, Fragment, memo} from 'react';
 import {Link} from 'react-router-dom';
 
 import {usersApi} from '_api/usersTestApi';
 import {renderAsyncData} from '_utils/asyncDataUtils';
-import {useStream} from '_utils/useStream';
+import {useStreamRD} from '_utils/useStream';
 import {userEntityStore} from './utils';
 
 type Props = {
@@ -15,16 +12,13 @@ type Props = {
 
 const User: FC<Props> = ({userId}) => {
     const data =
-        useStream(() => {
+        useStreamRD(() => {
             const userStringId = userId.toString();
 
             return userEntityStore.get(userStringId, () =>
-                pipe(
-                    usersApi.findById(userStringId),
-                    map(val => success(val))
-                )
+                usersApi.findById(userStringId)
             );
-        }, [userId]) ?? pending;
+        }, [userId]);
 
     return (
         <Fragment>
