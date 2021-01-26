@@ -4,7 +4,7 @@ import {useHistory} from 'react-router-dom';
 
 type PopupListItemProps = {
     item: string;
-    setOpen: any;
+    setOpen: (arg: boolean) => void;
     url?: string;
 };
 
