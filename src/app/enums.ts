@@ -1,3 +1,9 @@
 export enum ModalType {
-    CreateTask = 'createTask',
+    CreateTask = 'createTask'
+}
+
+export enum AddMenu {
+    AddTask = 'addTask',
+    AddFolder = 'AddFolder',
+    AddTag = 'AddTag'
 }

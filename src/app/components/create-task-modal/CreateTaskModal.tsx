@@ -8,10 +8,10 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import {Task} from '_types/common';
 import {VIEW_DATE_TIME} from '_consts/common';
+import {buildPath} from '_utils/buildPath';
+import {PageType} from '_enums/common';
 import {Button, TextField} from '@material-ui/core';
 import {LABELS} from '../../consts';
-import {buildPath} from '../../../core/utils/buildPath';
-import {PageType} from '../../../core/enums/common';
 
 type Props = {
     isOpen: boolean;

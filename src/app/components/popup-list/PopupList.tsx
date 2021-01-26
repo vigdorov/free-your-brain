@@ -1,17 +1,16 @@
-import {useHistory} from 'react-router-dom';
-import {Dialog, List, ListItem, ListItemText} from '@material-ui/core';
+import {Dialog, List} from '@material-ui/core';
 import React, {Fragment, memo, PropsWithChildren, useCallback} from 'react';
-import {v4} from 'uuid';
+import {PageType} from '_enums/common';
+import {buildPath} from '_utils/buildPath';
 import {MENU_ADDS} from '../../consts';
-import {PageType} from '../../../core/enums/common';
-import {buildPath} from '../../../core/utils/buildPath';
-import {ModalType} from '../../../app/enums';
+import {AddMenu, ModalType} from '../../../app/enums';
+import PopupListItem from '../popup-list-item';
 
 type Props = PropsWithChildren<{}>;
 
 const PopupList: React.FC<Props> = ({children}) => {
     const [open, setOpen] = React.useState(false);
-    const history = useHistory();
+    const url = buildPath({pageType: PageType.Main, query: {modal: ModalType.CreateTask}});
 
     const handleClickOpen = useCallback(() => {
         setOpen(true);
@@ -21,24 +20,15 @@ const PopupList: React.FC<Props> = ({children}) => {
         setOpen(false);
     }, [setOpen]);
 
-    const handleAddTicket = useCallback(() => {
-        history.push(buildPath({pageType: PageType.Main, query: {modal: ModalType.CreateTask}}));
-        setOpen(false);
-    }, [history]);
-
     return (
         <Fragment>
             <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
                 <List>
-                    {MENU_ADDS.map(item =>
-                        item === 'Добавить задачу' ? (
-                            <ListItem button onClick={handleAddTicket} key={v4()}>
-                                <ListItemText primary={item} />
-                            </ListItem>
+                    {MENU_ADDS.map((item, index) =>
+                        item.type === AddMenu.AddTask ? (
+                            <PopupListItem item={item.text} url={url} setOpen={setOpen} key={index} />
                         ) : (
-                            <ListItem button onClick={handleClose} key={v4()}>
-                                <ListItemText primary={item} />
-                            </ListItem>
+                            <PopupListItem item={item.text} setOpen={setOpen} key={index} />
                         )
                     )}
                 </List>

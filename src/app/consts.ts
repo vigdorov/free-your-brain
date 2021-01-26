@@ -1,4 +1,6 @@
+import {Menu} from '@material-ui/core';
 import {ROUTES} from '_consts/common';
+import {AddMenu} from './enums';
 
 export const LABELS = {
     SEACRH: 'Поиск',
@@ -11,7 +13,7 @@ export const LABELS = {
     TITLE: 'Заголовок',
     DESCRIPTION: 'Описание',
     START_AT: 'Начало',
-    END_AT: 'Окончание',
+    END_AT: 'Окончание'
 } as const;
 
 export const BOTH_MENU_LINKS = [
@@ -29,4 +31,8 @@ export const BOTH_MENU_LINKS = [
     }
 ];
 
-export const MENU_ADDS = [LABELS.ADD_TASK, LABELS.ADD_FOLDER, LABELS.ADD_TAG];
+export const MENU_ADDS = [
+    {text: LABELS.ADD_TASK, type: AddMenu.AddTask},
+    {text: LABELS.ADD_FOLDER, type: AddMenu.AddFolder},
+    {text: LABELS.ADD_TAG, type: AddMenu.AddTag}
+];
