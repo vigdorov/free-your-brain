@@ -1,4 +1,5 @@
-import React, {FC, memo} from 'react';
+import React, {FC, memo, useCallback} from 'react';
+import {useHistory} from 'react-router-dom';
 import {format} from 'date-fns';
 import {useFormik} from 'formik';
 import Dialog from '@material-ui/core/Dialog';
@@ -9,6 +10,8 @@ import {Task} from '_types/common';
 import {VIEW_DATE_TIME} from '_consts/common';
 import {Button, TextField} from '@material-ui/core';
 import {LABELS} from '../../consts';
+import {buildPath} from '../../../core/utils/buildPath';
+import {PageType} from '../../../core/enums/common';
 
 type Props = {
     isOpen: boolean;
@@ -17,17 +20,22 @@ type Props = {
 const now = format(new Date(), VIEW_DATE_TIME);
 
 const CreateTaskModal: FC<Props> = ({isOpen}) => {
+    const history = useHistory();
     const form = useFormik<Partial<Task>>({
         initialValues: {
             title: '',
             body: '',
             start_at: now,
-            end_at: '',
+            end_at: ''
         },
         onSubmit: () => {
             // В аргументах приходят values. Ждем задачи со сторами для формы
-        },
+        }
     });
+
+    const handleClose = useCallback(() => {
+        history.push(buildPath({pageType: PageType.Main}));
+    }, [history]);
 
     return (
         <Dialog open={isOpen}>
@@ -61,7 +69,7 @@ const CreateTaskModal: FC<Props> = ({isOpen}) => {
                         onChange={form.handleChange}
                         margin="dense"
                         InputLabelProps={{
-                            shrink: true,
+                            shrink: true
                         }}
                         fullWidth
                     />
@@ -73,13 +81,13 @@ const CreateTaskModal: FC<Props> = ({isOpen}) => {
                         onChange={form.handleChange}
                         margin="dense"
                         InputLabelProps={{
-                            shrink: true,
+                            shrink: true
                         }}
                         fullWidth
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button color="primary" type="button">
+                    <Button onClick={handleClose} color="primary" type="button">
                         {LABELS.CANCEL}
                     </Button>
                     <Button color="primary" type="submit">

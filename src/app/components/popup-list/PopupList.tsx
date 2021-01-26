@@ -5,6 +5,7 @@ import {v4} from 'uuid';
 import {MENU_ADDS} from '../../consts';
 import {PageType} from '../../../core/enums/common';
 import {buildPath} from '../../../core/utils/buildPath';
+import {ModalType} from '../../../app/enums';
 
 type Props = PropsWithChildren<{}>;
 
@@ -21,7 +22,7 @@ const PopupList: React.FC<Props> = ({children}) => {
     }, [setOpen]);
 
     const handleAddTicket = useCallback(() => {
-        // History.push(buildPath({pageType: PageType.Main, query[modal]: ModalType.CreateTask}));
+        history.push(buildPath({pageType: PageType.Main, query: {modal: ModalType.CreateTask}}));
         setOpen(false);
     }, [history]);
 
