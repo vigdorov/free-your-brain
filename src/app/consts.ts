@@ -1,4 +1,3 @@
-import {Menu} from '@material-ui/core';
 import {ROUTES} from '_consts/common';
 import {AddMenu} from './enums';
 
