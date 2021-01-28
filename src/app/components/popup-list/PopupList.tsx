@@ -1,10 +1,9 @@
-import {Dialog, List, ListItem, ListItemText} from '@material-ui/core';
+import {Dialog, List} from '@material-ui/core';
 import React, {Fragment, memo, PropsWithChildren, useCallback} from 'react';
-import {v4} from 'uuid';
 import {MENU_ADDS} from '../../consts';
+import PopupListItem from '../popup-list-item';
 
-type Props = PropsWithChildren<{
-}>;
+type Props = PropsWithChildren<{}>;
 
 const PopupList: React.FC<Props> = ({children}) => {
     const [open, setOpen] = React.useState(false);
@@ -22,15 +21,11 @@ const PopupList: React.FC<Props> = ({children}) => {
             <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
                 <List>
                     {MENU_ADDS.map(item => (
-                        <ListItem button onClick={handleClose} key={v4()}>
-                            <ListItemText primary={item} />
-                        </ListItem>
+                        <PopupListItem item={item.text} url={item.url} setOpen={setOpen} key={item.id} />
                     ))}
                 </List>
             </Dialog>
-            <div onClick={handleClickOpen}>
-                {children}
-            </div>
+            <div onClick={handleClickOpen}>{children}</div>
         </Fragment>
     );
 };

@@ -23,9 +23,9 @@ const useStyles = makeStyles(() =>
         container: {
             height: '100hv',
             display: 'flex',
-            flexDirection: 'column',
-        },
-    }),
+            flexDirection: 'column'
+        }
+    })
 );
 
 const Page: React.FC = () => {
