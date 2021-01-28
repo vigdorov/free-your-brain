@@ -10,19 +10,19 @@ import {NavLink} from 'react-router-dom';
 import {ROUTES} from '_consts/common';
 import ToggleMenu from '../toggle-menu';
 import {BOTH_MENU_LINKS} from '../../consts';
-import PopupList from '../popup-list/PopupList';
+import PopupList from '../popup-list';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         iconRight: {
-            marginRight: theme.spacing(2),
+            marginRight: theme.spacing(2)
         },
         appBar: {
             top: 'auto',
-            bottom: 0,
+            bottom: 0
         },
         grow: {
-            flexGrow: 1,
+            flexGrow: 1
         },
         fabButton: {
             position: 'absolute',
@@ -30,9 +30,9 @@ const useStyles = makeStyles((theme: Theme) =>
             top: -30,
             left: 0,
             right: 0,
-            margin: '0 auto',
-        },
-    }),
+            margin: '0 auto'
+        }
+    })
 );
 
 type Props = {
@@ -44,58 +44,37 @@ const BothMenu: React.FC<Props> = ({trigger}) => {
 
     return (
         <Slide appear={false} direction="up" in={!trigger}>
-            <AppBar
-                position="fixed"
-                color="primary"
-                className={classes.appBar}
-            >
+            <AppBar position="fixed" color="primary" className={classes.appBar}>
                 <Toolbar>
-                    <IconButton
-                        className={classes.iconRight}
-                        edge="start"
-                        color="inherit"
-                    >
+                    <IconButton className={classes.iconRight} edge="start" color="inherit">
                         <NavLink to={ROUTES.CHAOS_BOX}>
                             <MoveToInboxIcon />
                         </NavLink>
                     </IconButton>
-                    <IconButton
-                        edge="end"
-                        color="inherit"
-                    >
+                    <IconButton edge="end" color="inherit">
                         <NavLink to={ROUTES.PROJECTS}>
                             <ListAltIcon />
                         </NavLink>
                     </IconButton>
                     <PopupList>
-                        <Fab
-                            color="secondary"
-                            className={classes.fabButton}
-                        >
+                        <Fab color="secondary" className={classes.fabButton}>
                             <AddIcon />
                         </Fab>
                     </PopupList>
                     <div className={classes.grow} />
-                    <IconButton
-                        className={classes.iconRight}
-                        edge="start"
-                        color="inherit"
-                    >
+                    <IconButton className={classes.iconRight} edge="start" color="inherit">
                         <NavLink to={ROUTES.CALENDAR}>
                             <CalendarTodayIcon />
                         </NavLink>
                     </IconButton>
                     <ToggleMenu items={BOTH_MENU_LINKS}>
-                        <IconButton
-                            edge="end"
-                            color="inherit"
-                        >
+                        <IconButton edge="end" color="inherit">
                             <MoreIcon />
                         </IconButton>
                     </ToggleMenu>
                 </Toolbar>
             </AppBar>
-        </Slide >
+        </Slide>
     );
 };
 
