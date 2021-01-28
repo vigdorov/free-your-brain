@@ -17,6 +17,7 @@ import BothMenu from '../both-menu';
 import {queryParsers} from '../../utils';
 import {ModalType} from '../../enums';
 import CreateTaskModal from '../create-task-modal';
+import CreateTagModal from '../create-tag-modal';
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -33,6 +34,7 @@ const Page: React.FC = () => {
     const trigger = useScrollTrigger();
     const {modal} = useQuery(queryParsers);
     const isOpenCreateTaskModal = useMemo(() => modal === ModalType.CreateTask, [modal]);
+    const isOpenCreateTagModal = useMemo(() => modal === ModalType.CreateTag, [modal]);
     return (
         <Fragment>
             <div className={classes.container}>
@@ -55,6 +57,7 @@ const Page: React.FC = () => {
                 <BothMenu trigger={trigger} />
             </div>
             <CreateTaskModal isOpen={isOpenCreateTaskModal} />
+            <CreateTagModal isOpen={isOpenCreateTagModal} />
         </Fragment>
     );
 };
