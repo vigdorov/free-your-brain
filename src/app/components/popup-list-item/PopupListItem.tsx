@@ -4,8 +4,8 @@ import {useHistory} from 'react-router-dom';
 
 type PopupListItemProps = {
     item: string;
+    url: string;
     setOpen: (arg: boolean) => void;
-    url?: string;
 };
 
 const PopupListItem: React.FC<PopupListItemProps> = ({item, url, setOpen}) => {

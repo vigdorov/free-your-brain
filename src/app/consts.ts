@@ -1,5 +1,8 @@
+import {v4} from 'uuid';
 import {ROUTES} from '_consts/common';
-import {AddMenu} from './enums';
+import {PageType} from '../core/enums/common';
+import {buildPath} from '../core/utils/buildPath';
+import {AddMenu, ModalType} from './enums';
 
 export const LABELS = {
     SEACRH: 'Поиск',
@@ -31,7 +34,22 @@ export const BOTH_MENU_LINKS = [
 ];
 
 export const MENU_ADDS = [
-    {text: LABELS.ADD_TASK, type: AddMenu.AddTask},
-    {text: LABELS.ADD_FOLDER, type: AddMenu.AddFolder},
-    {text: LABELS.ADD_TAG, type: AddMenu.AddTag}
+    {
+        id: v4(),
+        text: LABELS.ADD_TASK,
+        type: AddMenu.AddTask,
+        url: buildPath({pageType: PageType.Main, query: {modal: ModalType.CreateTask}})
+    },
+    {
+        id: v4(),
+        text: LABELS.ADD_FOLDER,
+        type: AddMenu.AddFolder,
+        url: buildPath({pageType: PageType.Main, query: {modal: ModalType.CreateFolder}})
+    },
+    {
+        id: v4(),
+        text: LABELS.ADD_TAG,
+        type: AddMenu.AddTag,
+        url: buildPath({pageType: PageType.Main, query: {modal: ModalType.CreateTag}})
+    }
 ];
