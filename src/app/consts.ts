@@ -9,6 +9,7 @@ export const LABELS = {
     ADD_TASK: 'Добавить задачу',
     ADD_FOLDER: 'Добавить папку',
     ADD_TAG: 'Добавить тег',
+    ADD_ICON: 'Добавить иконку',
     CREATE_TASK: 'Создание задачи',
     CREATE: 'Создать',
     CANCEL: 'Отмена',
