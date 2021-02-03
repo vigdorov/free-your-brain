@@ -9,8 +9,11 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import {Task} from '_types/common';
 import {VIEW_DATE_TIME} from '_consts/common';
 import {buildPath} from '_utils/buildPath';
-import {PageType} from '_enums/common';
-import {Button, TextField} from '@material-ui/core';
+import {Icon, PageType} from '_enums/common';
+import {Button, TextField, MenuItem} from '@material-ui/core';
+import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
+import AddIcCallIcon from '@material-ui/icons/AddIcCall';
+import AirplanemodeActiveIcon from '@material-ui/icons/AirplanemodeActive';
 import {LABELS} from '../../consts';
 
 type Props = {
@@ -26,7 +29,8 @@ const CreateTaskModal: FC<Props> = ({isOpen}) => {
             title: '',
             body: '',
             start_at: now,
-            end_at: ''
+            end_at: '',
+            icon: Icon.AcUnit
         },
         onSubmit: () => {
             // В аргументах приходят values. Ждем задачи со сторами для формы
@@ -61,6 +65,26 @@ const CreateTaskModal: FC<Props> = ({isOpen}) => {
                         multiline
                         fullWidth
                     />
+                    <TextField
+                        value={form.values.icon}
+                        id="icon"
+                        name="icon"
+                        onChange={form.handleChange}
+                        margin="dense"
+                        label={LABELS.ADD_ICON}
+                        select
+                        fullWidth
+                    >
+                        <MenuItem value={Icon.AcUnit}>
+                            <AccessAlarmIcon fontSize="default" />
+                        </MenuItem>
+                        <MenuItem value={Icon.Apple}>
+                            <AddIcCallIcon fontSize="default" />
+                        </MenuItem>
+                        <MenuItem value={Icon.Apartment}>
+                            <AirplanemodeActiveIcon fontSize="default" />
+                        </MenuItem>
+                    </TextField>
                     <TextField
                         id="start_at"
                         value={form.values.start_at}
