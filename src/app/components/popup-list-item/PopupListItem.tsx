@@ -5,16 +5,14 @@ import {useHistory} from 'react-router-dom';
 type PopupListItemProps = {
     item: string;
     url: string;
-    setOpen: (isOpen: boolean) => void;
 };
 
-const PopupListItem: React.FC<PopupListItemProps> = ({item, url, setOpen}) => {
+const PopupListItem: React.FC<PopupListItemProps> = ({item, url}) => {
     const history = useHistory();
 
     const handleClick = useCallback(() => {
-        setOpen(false);
         history.push(url);
-    }, [history, setOpen, url]);
+    }, [history, url]);
 
     return (
         <ListItem button onClick={handleClick}>
