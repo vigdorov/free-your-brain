@@ -1,6 +1,6 @@
 import {AppBar, createStyles, Fab, IconButton, makeStyles, Theme, Toolbar} from '@material-ui/core';
 import Slide from '@material-ui/core/Slide';
-import React, {memo, useMemo} from 'react';
+import React, {memo} from 'react';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import AddIcon from '@material-ui/icons/Add';
 import MoveToInboxIcon from '@material-ui/icons/MoveToInbox';
@@ -8,12 +8,9 @@ import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import {NavLink} from 'react-router-dom';
 import {ROUTES} from '_consts/common';
-import {useQuery} from '_hooks/useQuery';
 import ToggleMenu from '../toggle-menu';
 import {BOTH_MENU_LINKS} from '../../consts';
 import PopupList from '../popup-list';
-import {queryParsers} from '../../../app/utils';
-import {ModalType} from '../../../app/enums';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -44,8 +41,6 @@ type Props = {
 
 const BothMenu: React.FC<Props> = ({trigger}) => {
     const classes = useStyles();
-    const {modal} = useQuery(queryParsers);
-    const isPopupListOpen = useMemo(() => modal === ModalType.CreateModal, [modal]);
 
     return (
         <Slide appear={false} direction="up" in={!trigger}>
@@ -61,7 +56,7 @@ const BothMenu: React.FC<Props> = ({trigger}) => {
                             <ListAltIcon />
                         </NavLink>
                     </IconButton>
-                    <PopupList open={isPopupListOpen}>
+                    <PopupList>
                         <Fab color="secondary" className={classes.fabButton}>
                             <AddIcon />
                         </Fab>
